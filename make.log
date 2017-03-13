@@ -1,0 +1,1961 @@
+make  all-recursive
+make[1]: Entering directory `/root/memcached-fast'
+Making all in doc
+make[2]: Entering directory `/root/memcached-fast/doc'
+make  all-am
+make[3]: Entering directory `/root/memcached-fast/doc'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/root/memcached-fast/doc'
+make[2]: Leaving directory `/root/memcached-fast/doc'
+make[2]: Entering directory `/root/memcached-fast'
+gcc -std=gnu99 -DHAVE_CONFIG_H -I.  -DNDEBUG -I /root/dpdk-2.2.0/build/include   -g -O2 -pthread -pthread -Wall -Werror -pedantic -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -MT memcached-fast_lib.o -MD -MP -MF .deps/memcached-fast_lib.Tpo -c -o memcached-fast_lib.o `test -f 'fast_lib.c' || echo './'`fast_lib.c
+In file included from fast_lib.c:14:0:
+/root/dpdk-2.2.0/build/include/rte_memory.h:66:21: error: ISO C restricts enumerator values to range of ‘int’ [-Werror=pedantic]
+  RTE_PGSIZE_4G    = 1ULL << 32,
+                     ^
+/root/dpdk-2.2.0/build/include/rte_memory.h:67:21: error: ISO C restricts enumerator values to range of ‘int’ [-Werror=pedantic]
+  RTE_PGSIZE_16G   = 1ULL << 34,
+                     ^
+/root/dpdk-2.2.0/build/include/rte_memory.h:96:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+In file included from fast_lib.c:15:0:
+/root/dpdk-2.2.0/build/include/rte_memzone.h:84:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+In file included from fast_lib.c:17:0:
+/root/dpdk-2.2.0/build/include/rte_eal.h:82:35: error: ‘RTE_MAX_LCORE’ undeclared here (not in a function)
+  enum rte_lcore_role_t lcore_role[RTE_MAX_LCORE]; /**< State of cores. */
+                                   ^
+In file included from fast_lib.c:23:0:
+/root/dpdk-2.2.0/build/include/rte_ring.h:182:9: error: ISO C forbids zero-size array ‘ring’ [-Werror=pedantic]
+  void * ring[0] __rte_cache_aligned; /**< Memory space of ring starts here.
+         ^
+In file included from fast_lib.c:25:0:
+/root/dpdk-2.2.0/build/include/rte_mempool.h:172:8: error: struct has no members [-Werror=pedantic]
+ struct rte_mempool_objtlr {
+        ^
+In file included from fast_lib.c:31:0:
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:726:18: error: ISO C forbids zero-size array ‘MARKER’ [-Werror=pedantic]
+ typedef void    *MARKER[0];   /**< generic marker for a point in a structure */
+                  ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:727:18: error: ISO C forbids zero-size array ‘MARKER8’ [-Werror=pedantic]
+ typedef uint8_t  MARKER8[0];  /**< generic marker with 1B alignment */
+                  ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:728:18: error: ISO C forbids zero-size array ‘MARKER64’ [-Werror=pedantic]
+ typedef uint64_t MARKER64[0]; /**< marker that allows us to overwrite 8 bytes
+                  ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:760:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:783:4: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+   };
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:784:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:797:6: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+     };
+      ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:800:5: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+    };
+     ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:822:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:831:4: error: type of bit-field ‘l2_len’ is a GCC extension [-Werror=pedantic]
+    uint64_t l2_len:7; /**< L2 (MAC) Header Length. */
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:832:4: error: type of bit-field ‘l3_len’ is a GCC extension [-Werror=pedantic]
+    uint64_t l3_len:9; /**< L3 (IP) Header Length. */
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:833:4: error: type of bit-field ‘l4_len’ is a GCC extension [-Werror=pedantic]
+    uint64_t l4_len:8; /**< L4 (TCP/UDP) Header Length. */
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:834:4: error: type of bit-field ‘tso_segsz’ is a GCC extension [-Werror=pedantic]
+    uint64_t tso_segsz:16; /**< TCP TSO segment size */
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:837:4: error: type of bit-field ‘outer_l3_len’ is a GCC extension [-Werror=pedantic]
+    uint64_t outer_l3_len:9; /**< Outer L3 (IP) Hdr Length. */
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:838:4: error: type of bit-field ‘outer_l2_len’ is a GCC extension [-Werror=pedantic]
+    uint64_t outer_l2_len:7; /**< Outer L2 (MAC) Hdr Length. */
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:841:4: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+   };
+    ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:842:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h: In function ‘rte_pktmbuf_reset’:
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:1310:17: error: ‘RTE_PKTMBUF_HEADROOM’ undeclared (first use in this function)
+  m->data_off = (RTE_PKTMBUF_HEADROOM <= m->buf_len) ?
+                 ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:1310:17: note: each undeclared identifier is reported only once for each function it appears in
+In file included from fast_lib.c:13:0:
+/root/dpdk-2.2.0/build/include/rte_mbuf.h: In function ‘rte_pktmbuf_detach’:
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:1414:24: error: ‘RTE_PKTMBUF_HEADROOM’ undeclared (first use in this function)
+  m->data_off = RTE_MIN(RTE_PKTMBUF_HEADROOM, (uint16_t)m->buf_len);
+                        ^
+/root/dpdk-2.2.0/build/include/rte_common.h:272:11: note: in definition of macro ‘RTE_MIN’
+   typeof (a) _a = (a); \
+           ^
+/root/dpdk-2.2.0/build/include/rte_common.h:271:23: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ #define RTE_MIN(a, b) ({ \
+                       ^
+/root/dpdk-2.2.0/build/include/rte_mbuf.h:1414:16: note: in expansion of macro ‘RTE_MIN’
+  m->data_off = RTE_MIN(RTE_PKTMBUF_HEADROOM, (uint16_t)m->buf_len);
+                ^
+In file included from /root/dpdk-2.2.0/build/include/rte_interrupts.h:55:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:181,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/exec-env/rte_interrupts.h: At top level:
+/root/dpdk-2.2.0/build/include/exec-env/rte_interrupts.h:89:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ethdev.h:184:0,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_devargs.h:90:3: error: ISO C99 doesn’t support unnamed structs/unions [-Werror=pedantic]
+  };
+   ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h: In function ‘rte_memcpy’:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: implicit declaration of function ‘_mm_alignr_epi8’ [-Werror=implicit-function-declaration]
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:474:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x01: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x01); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:475:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x02: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x02); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:476:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x03: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x03); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:477:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x04: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x04); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:478:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x05: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x05); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:479:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x06: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x06); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:480:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x07: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x07); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:481:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x08: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x08); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:482:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x09: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x09); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:483:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x0A: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x0A); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:484:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x0B: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x0B); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:485:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x0C: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x0C); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:486:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x0D: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x0D); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:487:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x0E: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x0E); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: error: incompatible type for argument 2 of ‘_mm_storeu_si128’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from /root/dpdk-2.2.0/build/include/rte_common.h:289:0,
+                 from fast_lib.c:13:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/emmintrin.h:700:1: note: expected ‘__m128i’ but argument is of type ‘int’
+ _mm_storeu_si128 (__m128i *__P, __m128i __B)
+ ^
+In file included from /root/dpdk-2.2.0/build/include/rte_ether.h:50:0,
+                 from /root/dpdk-2.2.0/build/include/rte_ethdev.h:185,
+                 from fast_lib.c:32:
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:411:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                                                          \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:488:16: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47_IMM’
+     case 0x0F: MOVEUNALIGNED_LEFT47_IMM(dst, src, n, 0x0F); break;    \
+                ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:472:1: error: ISO C forbids braced-groups within expressions [-Werror=pedantic]
+ ({                                                                    \
+ ^
+/root/dpdk-2.2.0/build/include/rte_memcpy.h:625:2: note: in expansion of macro ‘MOVEUNALIGNED_LEFT47’
+  MOVEUNALIGNED_LEFT47(dst, src, n, srcofs);
+  ^
+In file included from fast_lib.c:32:0:
+/root/dpdk-2.2.0/build/include/rte_ethdev.h: At top level:
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:224:22: error: ‘RTE_ETHDEV_QUEUE_STAT_CNTRS’ undeclared here (not in a function)
+  uint64_t q_ipackets[RTE_ETHDEV_QUEUE_STAT_CNTRS];
+                      ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:250:2: error: type of bit-field ‘link_status’ is a GCC extension [-Werror=pedantic]
+  uint8_t  link_status : 1; /**< 1 -> link up, 0 -> link down */
+  ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:342:2: error: type of bit-field ‘header_split’ is a GCC extension [-Werror=pedantic]
+  uint16_t header_split : 1, /**< Header Split enable. */
+  ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:343:3: error: type of bit-field ‘hw_ip_checksum’ is a GCC extension [-Werror=pedantic]
+   hw_ip_checksum   : 1, /**< IP/UDP/TCP checksum offload enable. */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:344:3: error: type of bit-field ‘hw_vlan_filter’ is a GCC extension [-Werror=pedantic]
+   hw_vlan_filter   : 1, /**< VLAN filter enable. */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:345:3: error: type of bit-field ‘hw_vlan_strip’ is a GCC extension [-Werror=pedantic]
+   hw_vlan_strip    : 1, /**< VLAN strip enable. */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:346:3: error: type of bit-field ‘hw_vlan_extend’ is a GCC extension [-Werror=pedantic]
+   hw_vlan_extend   : 1, /**< Extended VLAN enable. */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:347:3: error: type of bit-field ‘jumbo_frame’ is a GCC extension [-Werror=pedantic]
+   jumbo_frame      : 1, /**< Jumbo Frame Receipt enable. */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:348:3: error: type of bit-field ‘hw_strip_crc’ is a GCC extension [-Werror=pedantic]
+   hw_strip_crc     : 1, /**< Enable CRC stripping by hardware. */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:349:3: error: type of bit-field ‘enable_scatter’ is a GCC extension [-Werror=pedantic]
+   enable_scatter   : 1, /**< Enable scatter packets rx handler */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:350:3: error: type of bit-field ‘enable_lro’ is a GCC extension [-Werror=pedantic]
+   enable_lro       : 1; /**< Enable LRO */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:615:2: error: type of bit-field ‘hw_vlan_reject_tagged’ is a GCC extension [-Werror=pedantic]
+  uint8_t hw_vlan_reject_tagged : 1,
+  ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:617:3: error: type of bit-field ‘hw_vlan_reject_untagged’ is a GCC extension [-Werror=pedantic]
+   hw_vlan_reject_untagged : 1,
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:619:3: error: type of bit-field ‘hw_vlan_insert_pvid’ is a GCC extension [-Werror=pedantic]
+   hw_vlan_insert_pvid : 1;
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:1545:50: error: ‘RTE_MAX_QUEUES_PER_PORT’ undeclared here (not in a function)
+  struct rte_eth_rxtx_callback *post_rx_burst_cbs[RTE_MAX_QUEUES_PER_PORT];
+                                                  ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:1600:2: error: type of bit-field ‘promiscuous’ is a GCC extension [-Werror=pedantic]
+  uint8_t promiscuous   : 1, /**< RX promiscuous mode ON(1) / OFF(0). */
+  ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:1601:3: error: type of bit-field ‘scattered_rx’ is a GCC extension [-Werror=pedantic]
+   scattered_rx : 1,  /**< RX of scattered packets is ON(1) / OFF(0) */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:1602:3: error: type of bit-field ‘all_multicast’ is a GCC extension [-Werror=pedantic]
+   all_multicast : 1, /**< RX all multicast mode ON(1) / OFF(0). */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:1603:3: error: type of bit-field ‘dev_started’ is a GCC extension [-Werror=pedantic]
+   dev_started : 1,   /**< Device state: STARTED(1) / STOPPED(0). */
+   ^
+/root/dpdk-2.2.0/build/include/rte_ethdev.h:1604:3: error: type of bit-field ‘lro’ is a GCC extension [-Werror=pedantic]
+   lro         : 1;   /**< RX LRO is ON(1) / OFF(0) */
+   ^
+In file included from fast_lib.c:19:0:
+/root/dpdk-2.2.0/build/include/rte_lcore.h: In function ‘rte_lcore_to_socket_id’:
+/root/dpdk-2.2.0/build/include/rte_lcore.h:161:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1: all warnings being treated as errors
+make[2]: *** [memcached-fast_lib.o] Error 1
+make[2]: Leaving directory `/root/memcached-fast'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/root/memcached-fast'
+make: *** [all] Error 2
