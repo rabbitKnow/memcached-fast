@@ -350,7 +350,9 @@ AUTOMAKE = ${SHELL} /root/memcached-fast/missing automake-1.15
 AWK = gawk
 CC = gcc -std=gnu99
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -pthread -pthread -Wall -Werror -pedantic -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wl,--no-as-needed -ldl
+#disable warning as error -Werror
+
+CFLAGS = -g -O2 -pthread -pthread -Wall -pedantic -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wl,--no-as-needed -ldl
 CPP = gcc -E
 CPPFLAGS = -I/root/memcached-fast  
 CYGPATH_W = echo
