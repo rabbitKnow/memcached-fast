@@ -6468,13 +6468,14 @@ int main (int argc, char **argv) {
 			int ret;
 			ret=fast_lib_init();
 			t_socket=create_fast_socket();
-			bufsize=64;
+			uint16_t bufsize=64;
 			char *buf=malloc(bufsize);
 			memset(buf,1,bufsize);
-			len=bufsize;
+			uint16_t len=bufsize;
 			char addr[30];
 			strcpy(addr,"192.168.1.1");
 			ret=fast_bind(t_socket,addr);
+			printf("%d,%d",len,ret);
 		}
 
         if (portnumber_file) {
