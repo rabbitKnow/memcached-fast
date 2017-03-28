@@ -459,6 +459,8 @@ typedef struct _strchunk {
     char data[];
 } item_chunk;
 
+typedef struct conn conn;
+
 typedef struct {
     pthread_t thread_id;        /* unique ID of this thread */
     struct event_base *base;    /* libevent handle this thread uses */
@@ -475,7 +477,8 @@ typedef struct {
 /**
  * The structure representing a connection into memcached.
  */
-typedef struct conn conn;
+
+
 struct conn {
     int    sfd;
     sasl_conn_t *sasl_conn;
