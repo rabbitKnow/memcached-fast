@@ -611,7 +611,7 @@ enum store_item_type do_store_item(item *item, int comm, conn* c, const uint32_t
 conn *conn_new(const int sfd, const enum conn_states init_state, const int event_flags, const int read_buffer_size, enum network_transport transport, struct event_base *base);
 void conn_worker_readd(conn *c);
 
-static void fast_data_process(conn *c);
+void fast_data_process(conn *c);
 
 extern int daemonize(int nochdir, int noclose);
 

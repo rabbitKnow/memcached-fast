@@ -80,7 +80,7 @@ enum try_read_result {
 static enum try_read_result try_read_network(conn *c);
 static enum try_read_result try_read_udp(conn *c);
 static enum try_read_result fast_read_udp(conn *c);
-static void fast_data_process(conn *c);
+
 
 
 
@@ -4384,7 +4384,7 @@ static int try_read_command(conn *c) {
 }
 
 
-static void fast_data_process(conn *c){
+void fast_data_process(conn *c){
 		// process schedule as try to read udp
 	bool stop = false;
 	
