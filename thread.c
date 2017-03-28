@@ -10,6 +10,7 @@
 #include <string.h>
 #include <pthread.h>
 
+
 #ifdef __sun
 #include <atomic.h>
 #endif
@@ -361,9 +362,59 @@ static void setup_thread(LIBEVENT_THREAD *me) {
     }
 }
 
+/* fast read data*/
+static enum try_read_result fast_read_udp(conn *c) {
+    int res;
+
+    assert(c != NULL);
+	//set size for non-zero 
+    c->request_addr_size = sizeof(c->request_addr);
+    //res = recvfrom(c->sfd, c->rbuf, c->rsize,
+                   //0, (struct sockaddr *)&c->request_addr,
+                   //&c->request_addr_size);
+
+	//wait to set src_addr in the conn struct
+	
+	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,c->src_addr);
+	struct sockaddr_in *addr=(struct sockaddr_in *)&c->request_addr;
+	
+	addr.sin_addr.s_addr=c->src_addr;
+	c->request_addr_size=sizeof(struct sockaddr_in);
+	
+    if (res > 8) {
+        unsigned char *buf = (unsigned char *)c->rbuf;
+        pthread_mutex_lock(&c->thread->stats.mutex);
+        c->thread->stats.bytes_read += res;
+        pthread_mutex_unlock(&c->thread->stats.mutex);
+
+        /* Beginning of UDP packet is the request ID; save it. */
+        c->request_id = buf[0] * 256 + buf[1];
+
+        /* If this is a multi-packet request, drop it. */
+        if (buf[4] != 0 || buf[5] != 1) {
+            out_string(c, "SERVER_ERROR multi-packet request not supported");
+            return READ_NO_DATA_RECEIVED;
+        }
+
+        /* Don't care about any of the rest of the header. */
+        res -= 8;
+        memmove(c->rbuf, c->rbuf + 8, res);
+
+        c->rbytes = res;
+        c->rcurr = c->rbuf;
+        return READ_DATA_RECEIVED;
+    }
+    return READ_NO_DATA_RECEIVED;
+}
+
+
+
 /*
  * Worker thread: main event loop
+ rabbit change the thread core task 
+ !!!!wait to add loop
  */
+ 
 static void *worker_libevent(void *arg) {
     LIBEVENT_THREAD *me = arg;
 
@@ -377,7 +428,27 @@ static void *worker_libevent(void *arg) {
 
     register_thread_initialized();
 
-    event_base_loop(me->base, 0);
+	// process schedule as try to read udp
+	bool stop = false;
+	conn *c=me->c;
+	int res;
+	while(!stop){
+		
+		res=fast_read_udp(c);
+		switch (res) {
+	            case READ_NO_DATA_RECEIVED:
+	                conn_set_state(c, conn_waiting);
+	                break;
+	            case READ_DATA_RECEIVED:
+	                conn_set_state(c, conn_parse_cmd);
+	                break;
+	            
+	            }
+		fast_machine(c);
+		
+		}
+	//disable eventloop 
+	//event_base_loop(me->base, 0);
     return NULL;
 }
 
@@ -792,6 +863,8 @@ void memcached_thread_init(int nthreads) {
 
     /* Create threads after we've done all the libevent setup. */
     for (i = 0; i < nthreads; i++) {
+		//bind fast_conn i to corresponding thread
+		threads[i].c=fast_conns[i];
         create_worker(worker_libevent, &threads[i]);
     }
 

@@ -65,6 +65,8 @@
  * forward declarations
  */
 static void drive_machine(conn *c);
+static void fast_machine(conn *c);
+
 static int new_socket(struct addrinfo *ai);
 static int try_read_command(conn *c);
 
@@ -95,6 +97,8 @@ static void settings_init(void);
 static void event_handler(const int fd, const short which, void *arg);
 static void conn_close(conn *c);
 static void conn_init(void);
+static void fast_init(void);
+static void fast_queue_init(int num);
 static bool update_event(conn *c, const int new_flags);
 static void complete_nread(conn *c);
 static void process_command(conn *c, char *command);
@@ -114,6 +118,7 @@ struct stats_state stats_state;
 struct settings settings;
 time_t process_started;     /* when the process was started */
 conn **conns;
+conn **fast_conns;
 
 struct fast_socket *t_socket;	
 
@@ -123,6 +128,7 @@ volatile int slab_rebalance_signal;
 /** file scope variables **/
 static conn *listen_conn = NULL;
 static int max_fds;
+static int max_fast;
 static struct event_base *main_base;
 
 enum transmit_result {
@@ -282,7 +288,7 @@ static int add_msghdr(conn *c)
     memset(msg, 0, sizeof(struct msghdr));
 
     msg->msg_iov = &c->iov[c->iovused];
-
+	// set the udp header info
     if (IS_UDP(c->transport) && c->request_addr_size > 0) {
         msg->msg_name = &c->request_addr;
         msg->msg_namelen = c->request_addr_size;
@@ -416,6 +422,129 @@ static void conn_init(void) {
         exit(1);
     }
 }
+
+static void fast_queue_init(int id){
+	/* previous initialize fast struct associate with every thread*/
+	conn c*;
+	c=fast_conns[id];
+	if (NULL == c) {
+        if (!(c = (conn *)calloc(1, sizeof(conn)))) {
+            STATS_LOCK();
+            stats.malloc_fails++;
+            STATS_UNLOCK();
+            fprintf(stderr, "Failed to allocate connection object\n");
+            return NULL;
+        }
+        MEMCACHED_CONN_CREATE(c);
+
+        c->rbuf = c->wbuf = 0;
+        c->ilist = 0;
+        c->suffixlist = 0;
+        c->iov = 0;
+        c->msglist = 0;
+        c->hdrbuf = 0;
+
+        c->rsize = UDP_READ_BUFFER_SIZE;
+        c->wsize = DATA_BUFFER_SIZE;
+        c->isize = ITEM_LIST_INITIAL;
+        c->suffixsize = SUFFIX_LIST_INITIAL;
+        c->iovsize = IOV_LIST_INITIAL;
+        c->msgsize = MSG_LIST_INITIAL;
+        c->hdrsize = 0;
+
+        c->rbuf = (char *)malloc((size_t)c->rsize);
+        c->wbuf = (char *)malloc((size_t)c->wsize);
+        c->ilist = (item **)malloc(sizeof(item *) * c->isize);
+        c->suffixlist = (char **)malloc(sizeof(char *) * c->suffixsize);
+        c->iov = (struct iovec *)malloc(sizeof(struct iovec) * c->iovsize);
+        c->msglist = (struct msghdr *)malloc(sizeof(struct msghdr) * c->msgsize);
+
+        if (c->rbuf == 0 || c->wbuf == 0 || c->ilist == 0 || c->iov == 0 ||
+                c->msglist == 0 || c->suffixlist == 0) {
+            conn_free(c);
+            STATS_LOCK();
+            stats.malloc_fails++;
+            STATS_UNLOCK();
+            fprintf(stderr, "Failed to allocate buffers for connection\n");
+            return NULL;
+        }
+
+        STATS_LOCK();
+        stats_state.conn_structs++;
+        STATS_UNLOCK();
+
+        c->sfd = sfd;
+        conns[sfd] = c;
+    }
+	c->transport = udp_transport;
+	c->protocol = settings.binding_protocol;
+	if (!settings.socketpath) {
+		c->request_addr_size = sizeof(c->request_addr);
+	} else {
+		c->request_addr_size = 0;
+	}
+	
+    c->state = conn_read;
+    c->rlbytes = 0;
+    c->cmd = -1;
+    c->rbytes = c->wbytes = 0;
+    c->wcurr = c->wbuf;
+    c->rcurr = c->rbuf;
+    c->ritem = 0;
+    c->icurr = c->ilist;
+    c->suffixcurr = c->suffixlist;
+    c->ileft = 0;
+    c->suffixleft = 0;
+    c->iovused = 0;
+    c->msgcurr = 0;
+    c->msgused = 0;
+    c->authenticated = false;
+    c->last_cmd_time = current_time; /* initialize for idle kicker */
+
+    c->write_and_go = init_state;
+    c->write_and_free = 0;
+    c->item = 0;
+
+    c->noreply = false;
+
+
+    STATS_LOCK();
+    stats_state.curr_conns++;
+    stats.total_conns++;
+    STATS_UNLOCK();
+			
+
+}
+static void fast_init(int thread_num) {
+
+	int ret;
+	ret=fast_lib_init();
+	t_socket=create_fast_socket();
+	// using struct's buffer
+	//uint16_t bufsize=64;
+	//char *buf=malloc(bufsize);
+	//memset(buf,1,bufsize);
+	//uint16_t len=bufsize;
+	char addr[30];
+	strcpy(addr,"192.168.1.1");
+	ret=fast_bind(t_socket,addr);
+	// wait to alloc buffer
+
+    max_fast = thread_num;
+
+    if ((fast_conns = calloc(max_fds, sizeof(conn *))) == NULL) {
+        fprintf(stderr, "Failed to allocate connection structures\n");
+        /* This is unrecoverable so bail out early. */
+        exit(1);
+    }
+	int id=0;
+	for(;id<thread_num;id++){
+		fast_queue_init(id);
+	}
+	
+	
+}
+
 
 static const char *prot_text(enum protocol prot) {
     char *rv = "unknown";
@@ -4439,7 +4568,8 @@ static enum transmit_result transmit(conn *c) {
         ssize_t res;
         struct msghdr *m = &c->msglist[c->msgcurr];
 
-        res = sendmsg(c->sfd, m, 0);
+        //res = sendmsg(c->sfd, m, 0);
+        res=fast_sendmsg(t_socket,m,0);
         if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
             c->thread->stats.bytes_written += res;
@@ -4544,6 +4674,281 @@ static int read_into_chunked_item(conn *c) {
     }
     return total;
 }
+
+static void fast_machine(conn *c) {
+    bool stop = false;
+    int sfd;
+    socklen_t addrlen;
+    struct sockaddr_storage addr;
+    int nreqs = settings.reqs_per_event;
+    int res;
+    const char *str;
+#ifdef HAVE_ACCEPT4
+    static int  use_accept4 = 1;
+#else
+    static int  use_accept4 = 0;
+#endif
+
+    assert(c != NULL);
+
+    while (!stop) {
+
+        switch(c->state) {
+        
+        case conn_waiting:
+            
+            conn_set_state(c, conn_read);
+            stop = true;
+            break;
+
+        case conn_read:
+            
+            stop = true;
+            
+            break;
+
+        case conn_parse_cmd :
+            if (try_read_command(c) == 0) {
+                /* wee need more data! */
+                conn_set_state(c, conn_waiting);
+            }
+
+            break;
+
+        case conn_new_cmd:
+            /* Only process nreqs at a time to avoid starving other
+               connections */
+
+            --nreqs;
+            if (nreqs >= 0) {
+                reset_cmd_handler(c);
+            } else {
+                pthread_mutex_lock(&c->thread->stats.mutex);
+                c->thread->stats.conn_yields++;
+                pthread_mutex_unlock(&c->thread->stats.mutex);
+                if (c->rbytes > 0) {
+                    /* We have already read in data into the input buffer,
+                       so libevent will most likely not signal read events
+                       on the socket (unless more data is available. As a
+                       hack we should just put in a request to write data,
+                       because that should be possible ;-)
+                    */
+                    if (!update_event(c, EV_WRITE | EV_PERSIST)) {
+                        if (settings.verbose > 0)
+                            fprintf(stderr, "Couldn't update event\n");
+                        conn_set_state(c, conn_closing);
+                        break;
+                    }
+                }
+                stop = true;
+            }
+            break;
+
+        case conn_nread:
+            if (c->rlbytes == 0) {
+                complete_nread(c);
+                break;
+            }
+
+            /* Check if rbytes < 0, to prevent crash */
+            if (c->rlbytes < 0) {
+                if (settings.verbose) {
+                    fprintf(stderr, "Invalid rlbytes to read: len %d\n", c->rlbytes);
+                }
+                conn_set_state(c, conn_closing);
+                break;
+            }
+
+            if (!c->item || (((item *)c->item)->it_flags & ITEM_CHUNKED) == 0) {
+                /* first check if we have leftovers in the conn_read buffer */
+                if (c->rbytes > 0) {
+                    int tocopy = c->rbytes > c->rlbytes ? c->rlbytes : c->rbytes;
+                    if (c->ritem != c->rcurr) {
+                        memmove(c->ritem, c->rcurr, tocopy);
+                    }
+                    c->ritem += tocopy;
+                    c->rlbytes -= tocopy;
+                    c->rcurr += tocopy;
+                    c->rbytes -= tocopy;
+                    if (c->rlbytes == 0) {
+                        break;
+                    }
+                }
+
+                /*  now try reading from the socket */
+                res = read(c->sfd, c->ritem, c->rlbytes);
+                if (res > 0) {
+                    pthread_mutex_lock(&c->thread->stats.mutex);
+                    c->thread->stats.bytes_read += res;
+                    pthread_mutex_unlock(&c->thread->stats.mutex);
+                    if (c->rcurr == c->ritem) {
+                        c->rcurr += res;
+                    }
+                    c->ritem += res;
+                    c->rlbytes -= res;
+                    break;
+                }
+            } else {
+                res = read_into_chunked_item(c);
+                if (res > 0)
+                    break;
+            }
+
+            if (res == 0) { /* end of stream */
+                conn_set_state(c, conn_closing);
+                break;
+            }
+
+            if (res == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
+                if (!update_event(c, EV_READ | EV_PERSIST)) {
+                    if (settings.verbose > 0)
+                        fprintf(stderr, "Couldn't update event\n");
+                    conn_set_state(c, conn_closing);
+                    break;
+                }
+                stop = true;
+                break;
+            }
+            /* otherwise we have a real error, on which we close the connection */
+            if (settings.verbose > 0) {
+                fprintf(stderr, "Failed to read, and not due to blocking:\n"
+                        "errno: %d %s \n"
+                        "rcurr=%lx ritem=%lx rbuf=%lx rlbytes=%d rsize=%d\n",
+                        errno, strerror(errno),
+                        (long)c->rcurr, (long)c->ritem, (long)c->rbuf,
+                        (int)c->rlbytes, (int)c->rsize);
+            }
+            conn_set_state(c, conn_closing);
+            break;
+
+        case conn_swallow:
+            /* we are reading sbytes and throwing them away */
+            if (c->sbytes == 0) {
+                conn_set_state(c, conn_new_cmd);
+                break;
+            }
+
+            /* first check if we have leftovers in the conn_read buffer */
+            if (c->rbytes > 0) {
+                int tocopy = c->rbytes > c->sbytes ? c->sbytes : c->rbytes;
+                c->sbytes -= tocopy;
+                c->rcurr += tocopy;
+                c->rbytes -= tocopy;
+                break;
+            }
+
+            /*  now try reading from the socket */
+            res = read(c->sfd, c->rbuf, c->rsize > c->sbytes ? c->sbytes : c->rsize);
+            if (res > 0) {
+                pthread_mutex_lock(&c->thread->stats.mutex);
+                c->thread->stats.bytes_read += res;
+                pthread_mutex_unlock(&c->thread->stats.mutex);
+                c->sbytes -= res;
+                break;
+            }
+            if (res == 0) { /* end of stream */
+                conn_set_state(c, conn_closing);
+                break;
+            }
+            if (res == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
+                if (!update_event(c, EV_READ | EV_PERSIST)) {
+                    if (settings.verbose > 0)
+                        fprintf(stderr, "Couldn't update event\n");
+                    conn_set_state(c, conn_closing);
+                    break;
+                }
+                stop = true;
+                break;
+            }
+            /* otherwise we have a real error, on which we close the connection */
+            if (settings.verbose > 0)
+                fprintf(stderr, "Failed to read, and not due to blocking\n");
+            conn_set_state(c, conn_closing);
+            break;
+
+        case conn_write:
+            /*
+             * We want to write out a simple response. If we haven't already,
+             * assemble it into a msgbuf list (this will be a single-entry
+             * list for TCP or a two-entry list for UDP).
+             */
+            if (c->iovused == 0 || (IS_UDP(c->transport) && c->iovused == 1)) {
+                if (add_iov(c, c->wcurr, c->wbytes) != 0) {
+                    if (settings.verbose > 0)
+                        fprintf(stderr, "Couldn't build response\n");
+                    conn_set_state(c, conn_closing);
+                    break;
+                }
+            }
+
+            /* fall through... */
+
+        case conn_mwrite:
+          if (IS_UDP(c->transport) && c->msgcurr == 0 && build_udp_headers(c) != 0) {
+            if (settings.verbose > 0)
+              fprintf(stderr, "Failed to build UDP headers\n");
+            conn_set_state(c, conn_closing);
+            break;
+          }
+            switch (transmit(c)) {
+            case TRANSMIT_COMPLETE:
+                if (c->state == conn_mwrite) {
+                    conn_release_items(c);
+                    /* XXX:  I don't know why this wasn't the general case */
+                    if(c->protocol == binary_prot) {
+                        conn_set_state(c, c->write_and_go);
+                    } else {
+                        conn_set_state(c, conn_new_cmd);
+                    }
+                } else if (c->state == conn_write) {
+                    if (c->write_and_free) {
+                        free(c->write_and_free);
+                        c->write_and_free = 0;
+                    }
+                    conn_set_state(c, c->write_and_go);
+                } else {
+                    if (settings.verbose > 0)
+                        fprintf(stderr, "Unexpected state %d\n", c->state);
+                    conn_set_state(c, conn_closing);
+                }
+                break;
+
+            case TRANSMIT_INCOMPLETE:
+            case TRANSMIT_HARD_ERROR:
+                break;                   /* Continue in state machine. */
+
+            case TRANSMIT_SOFT_ERROR:
+                stop = true;
+                break;
+            }
+            break;
+
+        case conn_closing:
+            if (IS_UDP(c->transport))
+                conn_cleanup(c);
+            else
+                conn_close(c);
+            stop = true;
+            break;
+
+        case conn_closed:
+            /* This only happens if dormando is an idiot. */
+            abort();
+            break;
+
+        case conn_watch:
+            /* We handed off our connection to the logger thread. */
+            stop = true;
+            break;
+        case conn_max_state:
+            assert(false);
+            break;
+        }
+    }
+
+    return;
+}
+
 
 static void drive_machine(conn *c) {
     bool stop = false;
@@ -6367,6 +6772,7 @@ int main (int argc, char **argv) {
     stats_init();
     assoc_init(settings.hashpower_init);
     conn_init();
+	
     slabs_init(settings.maxbytes, settings.factor, preallocate,
             use_slab_sizes ? slab_sizes : NULL);
 
@@ -6378,6 +6784,9 @@ int main (int argc, char **argv) {
         perror("failed to ignore SIGPIPE; sigaction");
         exit(EX_OSERR);
     }
+	
+	fast_init(settings.num_threads);//fast initialize 
+	
     /* start up worker threads if MT mode */
     memcached_thread_init(settings.num_threads);
 
@@ -6447,7 +6856,7 @@ int main (int argc, char **argv) {
         */
 
         /*
-         * initialization order: first create the listening sockets
+         * initialization order: first create the listening  sockets
          * (may need root on low ports), then drop root if needed,
          * then daemonise if needed, then init libevent (in some cases
          * descriptors created by libevent wouldn't survive forking).
@@ -6465,16 +6874,7 @@ int main (int argc, char **argv) {
         */
 
 		if(settings.udpport){
-			int ret;
-			ret=fast_lib_init();
-			t_socket=create_fast_socket();
-			uint16_t bufsize=64;
-			char *buf=malloc(bufsize);
-			memset(buf,1,bufsize);
-			uint16_t len=bufsize;
-			char addr[30];
-			strcpy(addr,"192.168.1.1");
-			ret=fast_bind(t_socket,addr);
+			
 			printf("%d,%d",len,ret);
 		}
 

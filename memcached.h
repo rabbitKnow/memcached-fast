@@ -469,6 +469,7 @@ typedef struct {
     struct conn_queue *new_conn_queue; /* queue of new connections to handle */
     cache_t *suffix_cache;      /* suffix cache */
     logger *l;                  /* logger buffer */
+	conn *c;
 } LIBEVENT_THREAD;
 
 /**
@@ -545,6 +546,8 @@ struct conn {
     socklen_t request_addr_size;
     unsigned char *hdrbuf; /* udp packet headers */
     int    hdrsize;   /* number of headers' worth of space is allocated */
+	uint32_t src_addr;
+	
 
     bool   noreply;   /* True if the reply should not be sent. */
     /* current stats command */
@@ -567,6 +570,9 @@ struct conn {
 
 /* array of conn structures, indexed by file descriptor */
 extern conn **conns;
+extern conn **fast_conns;
+extern struct fast_socket *t_socket;	
+
 
 /* current time of day (updated periodically) */
 extern volatile rel_time_t current_time;
