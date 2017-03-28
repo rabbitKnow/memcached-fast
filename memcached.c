@@ -4400,7 +4400,7 @@ static enum try_read_result fast_read_udp(conn *c) {
 	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,c->src_addr);
 	struct sockaddr_in *addr=(struct sockaddr_in *)&c->request_addr;
 	
-	addr.sin_addr.s_addr=c->src_addr;
+	addr->sin_addr.s_addr=c->src_addr;
 	c->request_addr_size=sizeof(struct sockaddr_in);
 	
     if (res > 8) {
