@@ -97,7 +97,7 @@ static void settings_init(void);
 static void event_handler(const int fd, const short which, void *arg);
 static void conn_close(conn *c);
 static void conn_init(void);
-static void fast_socket_init(void);
+static void fast_socket_init(int thread_num);
 static void fast_queue_init(int num);
 static bool update_event(conn *c, const int new_flags);
 static void complete_nread(conn *c);
