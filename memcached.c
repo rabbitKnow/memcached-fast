@@ -79,6 +79,8 @@ enum try_read_result {
 
 static enum try_read_result try_read_network(conn *c);
 static enum try_read_result try_read_udp(conn *c);
+static enum try_read_result fast_read_udp(conn *c);
+
 
 static void conn_set_state(conn *c, enum conn_states state);
 static int start_conn_timeout_thread();
@@ -518,6 +520,8 @@ static void fast_socket_init(int thread_num) {
 
 	int ret;
 	ret=fast_lib_init();
+	if(ret<0)
+		return ;
 	t_socket=create_fast_socket();
 	// using struct's buffer
 	//uint16_t bufsize=64;
@@ -540,7 +544,7 @@ static void fast_socket_init(int thread_num) {
 	for(;id<thread_num;id++){
 		fast_queue_init(id);
 	}
-	
+	return;
 	
 }
 
@@ -4376,6 +4380,57 @@ static int try_read_command(conn *c) {
 
     return 1;
 }
+
+
+
+
+/* fast read data*/
+static enum try_read_result fast_read_udp(conn *c) {
+    int res;
+
+    assert(c != NULL);
+	//set size for non-zero 
+    c->request_addr_size = sizeof(c->request_addr);
+    //res = recvfrom(c->sfd, c->rbuf, c->rsize,
+                   //0, (struct sockaddr *)&c->request_addr,
+                   //&c->request_addr_size);
+
+	//wait to set src_addr in the conn struct
+	
+	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,c->src_addr);
+	struct sockaddr_in *addr=(struct sockaddr_in *)&c->request_addr;
+	
+	addr.sin_addr.s_addr=c->src_addr;
+	c->request_addr_size=sizeof(struct sockaddr_in);
+	
+    if (res > 8) {
+        unsigned char *buf = (unsigned char *)c->rbuf;
+        pthread_mutex_lock(&c->thread->stats.mutex);
+        c->thread->stats.bytes_read += res;
+        pthread_mutex_unlock(&c->thread->stats.mutex);
+
+        /* Beginning of UDP packet is the request ID; save it. */
+        c->request_id = buf[0] * 256 + buf[1];
+
+        /* If this is a multi-packet request, drop it. */
+        if (buf[4] != 0 || buf[5] != 1) {
+            out_string(c, "SERVER_ERROR multi-packet request not supported");
+            return READ_NO_DATA_RECEIVED;
+        }
+
+        /* Don't care about any of the rest of the header. */
+        res -= 8;
+        memmove(c->rbuf, c->rbuf + 8, res);
+
+        c->rbytes = res;
+        c->rcurr = c->rbuf;
+        return READ_DATA_RECEIVED;
+    }
+    return READ_NO_DATA_RECEIVED;
+}
+
+
+
 
 /*
  * read a UDP request.
