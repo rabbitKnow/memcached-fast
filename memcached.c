@@ -80,6 +80,8 @@ enum try_read_result {
 static enum try_read_result try_read_network(conn *c);
 static enum try_read_result try_read_udp(conn *c);
 static enum try_read_result fast_read_udp(conn *c);
+static void fast_data_process(conn *c);
+
 
 
 static void conn_set_state(conn *c, enum conn_states state);
@@ -4382,7 +4384,28 @@ static int try_read_command(conn *c) {
 }
 
 
+static void fast_data_process(conn *c){
+		// process schedule as try to read udp
+	bool stop = false;
+	
+	int res;
+	while(!stop){
+		res=fast_read_udp(c);
+		switch (res) {
+	            case READ_NO_DATA_RECEIVED:
+	                conn_set_state(c, conn_waiting);
+	                break;
+	            case READ_DATA_RECEIVED:
+	                conn_set_state(c, conn_parse_cmd);
+	                break;
+	            
+	            }
+		fast_machine(c);
+		
+		}
 
+
+}
 
 /* fast read data*/
 static enum try_read_result fast_read_udp(conn *c) {
