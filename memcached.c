@@ -97,7 +97,7 @@ static void settings_init(void);
 static void event_handler(const int fd, const short which, void *arg);
 static void conn_close(conn *c);
 static void conn_init(void);
-static void fast_init(void);
+static void fast_socket_init(void);
 static void fast_queue_init(int num);
 static bool update_event(conn *c, const int new_flags);
 static void complete_nread(conn *c);
@@ -473,8 +473,7 @@ static void fast_queue_init(int id){
         stats_state.conn_structs++;
         STATS_UNLOCK();
 
-        c->sfd = sfd;
-        conns[sfd] = c;
+        
     }
 	c->transport = udp_transport;
 	c->protocol = settings.binding_protocol;
@@ -501,7 +500,7 @@ static void fast_queue_init(int id){
     c->authenticated = false;
     c->last_cmd_time = current_time; /* initialize for idle kicker */
 
-    c->write_and_go = init_state;
+    c->write_and_go = conn_read;
     c->write_and_free = 0;
     c->item = 0;
 
@@ -515,7 +514,7 @@ static void fast_queue_init(int id){
 			
 
 }
-static void fast_init(int thread_num) {
+static void fast_socket_init(int thread_num) {
 
 	int ret;
 	ret=fast_lib_init();
@@ -4677,17 +4676,10 @@ static int read_into_chunked_item(conn *c) {
 
 static void fast_machine(conn *c) {
     bool stop = false;
-    int sfd;
-    socklen_t addrlen;
-    struct sockaddr_storage addr;
+  
     int nreqs = settings.reqs_per_event;
     int res;
-    const char *str;
-#ifdef HAVE_ACCEPT4
-    static int  use_accept4 = 1;
-#else
-    static int  use_accept4 = 0;
-#endif
+
 
     assert(c != NULL);
 
@@ -4943,6 +4935,8 @@ static void fast_machine(conn *c) {
         case conn_max_state:
             assert(false);
             break;
+		default:
+			return;
         }
     }
 
@@ -6061,27 +6055,9 @@ static bool _parse_slab_sizes(char *s, uint32_t *slab_sizes) {
 }
 
 
-static void dpdk_test(){
-	int ret;
-	ret=fast_lib_init();
-	struct fast_socket *socket=create_fast_socket();
-	if(ret<-1)
-		return;
-	
-	uint16_t bufsize=64;
-	char buf[bufsize];
-        memset(buf,1,bufsize);
-        uint16_t len=bufsize;
-        char addr[]="192.168.0.1";
-        ret=fast_bind(socket,addr);
-	ret=fast_sendto(socket,buf,len,0,22);
-
-}
-
-
-
+ 
 int main (int argc, char **argv) {
-    dpdk_test();
+    
     int c;
     bool lock_memory = false;
     bool do_daemonize = false;
@@ -6785,7 +6761,7 @@ int main (int argc, char **argv) {
         exit(EX_OSERR);
     }
 	
-	fast_init(settings.num_threads);//fast initialize 
+	fast_socket_init(settings.num_threads);//fast initialize 
 	
     /* start up worker threads if MT mode */
     memcached_thread_init(settings.num_threads);
@@ -6875,7 +6851,7 @@ int main (int argc, char **argv) {
 
 		if(settings.udpport){
 			
-			printf("%d,%d",len,ret);
+			printf("udp enable\n");
 		}
 
         if (portnumber_file) {
