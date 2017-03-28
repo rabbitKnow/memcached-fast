@@ -425,7 +425,7 @@ static void conn_init(void) {
 
 static void fast_queue_init(int id){
 	/* previous initialize fast struct associate with every thread*/
-	conn c*;
+	conn *c;
 	c=fast_conns[id];
 	if (NULL == c) {
         if (!(c = (conn *)calloc(1, sizeof(conn)))) {
