@@ -527,6 +527,7 @@ static void fast_socket_init(int thread_num) {
 	if(ret<0)
 		return ;
 	t_socket=create_fast_socket();
+	fprintf(stderr, "fast socket create after\n");
 	// using struct's buffer
 	//uint16_t bufsize=64;
 	//char *buf=malloc(bufsize);
@@ -535,6 +536,7 @@ static void fast_socket_init(int thread_num) {
 	char addr[30];
 	strcpy(addr,"192.168.1.1");
 	ret=fast_bind(t_socket,addr);
+	fprintf(stderr, "fast bind after\n");
 	// wait to alloc buffer
 
     max_fast = thread_num;
