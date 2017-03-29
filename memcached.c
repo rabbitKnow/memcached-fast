@@ -521,7 +521,9 @@ static void fast_queue_init(int id){
 static void fast_socket_init(int thread_num) {
 
 	int ret;
+	fprintf(stderr, "fast lib init before\n");
 	ret=fast_lib_init();
+	fprintf(stderr, "fast lib init after\n");
 	if(ret<0)
 		return ;
 	t_socket=create_fast_socket();
