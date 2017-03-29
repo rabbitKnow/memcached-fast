@@ -551,6 +551,8 @@ static void fast_socket_init(int thread_num) {
 	for(;id<thread_num;id++){
 		fast_queue_init(id);
 	}
+	fprintf(stderr, "fast queue init after\n");
+	
 	return;
 	
 }
