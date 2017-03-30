@@ -6847,9 +6847,12 @@ int main (int argc, char **argv) {
     }
 	
 	fast_socket_init(settings.num_threads);//fast initialize 
-	
+
+	fprintf(stderr, "socket init finished\n");
     /* start up worker threads if MT mode */
     memcached_thread_init(settings.num_threads);
+
+	fprintf(stderr, "thread init finished\n");
 
     if (start_assoc_maintenance_thread() == -1) {
         exit(EXIT_FAILURE);
@@ -6960,7 +6963,7 @@ int main (int argc, char **argv) {
     }
 
     /* Drop privileges no longer needed */
-    drop_privileges();
+    drop_privileges(); 
 
     /* Initialize the uriencode lookup table. */
     uriencode_init();
