@@ -4428,8 +4428,9 @@ static enum try_read_result fast_read_udp(conn *c) {
                    //&c->request_addr_size);
 
 	//wait to set src_addr in the conn struct
-	
+	fprintf(stderr, " try fast read\n");
 	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,c->src_addr);
+	fprintf(stderr, " after try fast read\n");
 	struct sockaddr_in *addr=(struct sockaddr_in *)&c->request_addr;
 	
 	addr->sin_addr.s_addr=c->src_addr;
@@ -4471,14 +4472,14 @@ static enum try_read_result try_read_udp(conn *c) {
     int res;
 
     assert(c != NULL);
-	fprintf(stderr, " try fast read\n");
+	
 
     c->request_addr_size = sizeof(c->request_addr);
 	
     res = recvfrom(c->sfd, c->rbuf, c->rsize,
                    0, (struct sockaddr *)&c->request_addr,
                    &c->request_addr_size);
-	fprintf(stderr, "recvfrom finished\n");
+	
     if (res > 8) {
         unsigned char *buf = (unsigned char *)c->rbuf;
         pthread_mutex_lock(&c->thread->stats.mutex);
