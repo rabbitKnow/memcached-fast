@@ -529,7 +529,7 @@ static void fast_socket_init(int thread_num) {
 	//t_socket=create_fast_socket();
 	t_socket=malloc(sizeof(struct fast_socket));
 	fprintf(stderr, "fast socket create after\n");
-	// using struct's buffer
+	//using struct's buffer
 	//uint16_t bufsize=64;
 	//char *buf=malloc(bufsize);
 	//memset(buf,1,bufsize);
