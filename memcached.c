@@ -429,8 +429,9 @@ static void conn_init(void) {
 
 static void fast_queue_init(int id){
 	/* previous initialize fast struct associate with every thread*/
-	conn *c;
-	c=fast_conns[id];
+	conn *c=NULL;
+	//joke !!c== null!!
+	//c=fast_conns[id];
 	if (NULL == c) {
         if (!(c = (conn *)calloc(1, sizeof(conn)))) {
             STATS_LOCK();
@@ -515,7 +516,7 @@ static void fast_queue_init(int id){
     stats_state.curr_conns++;
     stats.total_conns++;
     STATS_UNLOCK();
-			
+	fast_conns[id]=c;
 
 }
 static void fast_socket_init(int thread_num) {
