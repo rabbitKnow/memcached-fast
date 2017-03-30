@@ -4419,7 +4419,7 @@ void fast_data_process(conn *c){
 /* fast read data*/
 static enum try_read_result fast_read_udp(conn *c) {
     int res;
-
+	fprintf(stderr, " if c is null?\n");
     assert(c != NULL);
 	//set size for non-zero 
     c->request_addr_size = sizeof(c->request_addr);
