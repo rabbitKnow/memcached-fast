@@ -4397,7 +4397,9 @@ void fast_data_process(conn *c){
 	
 	int res;
 	while(!stop){
+		fprintf(stderr, "before fast read\n");
 		res=fast_read_udp(c);
+		fprintf(stderr, "after fast read\n");
 		switch (res) {
 	            case READ_NO_DATA_RECEIVED:
 	                conn_set_state(c, conn_waiting);
@@ -4469,11 +4471,14 @@ static enum try_read_result try_read_udp(conn *c) {
     int res;
 
     assert(c != NULL);
+	fprintf(stderr, " try fast read\n");
 
     c->request_addr_size = sizeof(c->request_addr);
+	
     res = recvfrom(c->sfd, c->rbuf, c->rsize,
                    0, (struct sockaddr *)&c->request_addr,
                    &c->request_addr_size);
+	fprintf(stderr, "recvfrom finished\n");
     if (res > 8) {
         unsigned char *buf = (unsigned char *)c->rbuf;
         pthread_mutex_lock(&c->thread->stats.mutex);
