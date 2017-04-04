@@ -432,13 +432,13 @@ static void fast_queue_init(int id){
 	conn *c=NULL;
 	//joke !!c== null!!
 	//c=fast_conns[id];
-	if (NULL == c) {
+	fif (NULL == c) {
         if (!(c = (conn *)calloc(1, sizeof(conn)))) {
             STATS_LOCK();
             stats.malloc_fails++;
             STATS_UNLOCK();
             fprintf(stderr, "Failed to allocate connection object\n");
-            return NULL;
+            return ;
         }
         MEMCACHED_CONN_CREATE(c);
 
@@ -471,7 +471,7 @@ static void fast_queue_init(int id){
             stats.malloc_fails++;
             STATS_UNLOCK();
             fprintf(stderr, "Failed to allocate buffers for connection\n");
-            return NULL;
+            return ;
         }
 
         STATS_LOCK();
