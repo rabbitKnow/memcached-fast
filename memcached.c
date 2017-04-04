@@ -432,7 +432,7 @@ static void fast_queue_init(int id){
 	conn *c=NULL;
 	//joke !!c== null!!
 	//c=fast_conns[id];
-	fif (NULL == c) {
+	if (NULL == c) {
         if (!(c = (conn *)calloc(1, sizeof(conn)))) {
             STATS_LOCK();
             stats.malloc_fails++;
