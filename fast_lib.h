@@ -18,4 +18,4 @@ int fast_sendto(struct fast_socket * socket,const void *buf,size_t len,int flags
 
 int fast_sendmsg(struct fast_socket * socket,const struct msghdr *msg,int flags);
 
-int fast_recvfrom(struct fast_socket * socket, void *buf, size_t len, int flags,uint32_t src_addr);
+int fast_recvfrom(struct fast_socket * socket, void *buf, size_t len, int flags,uint32_t *src_addr);
