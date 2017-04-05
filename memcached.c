@@ -3996,30 +3996,35 @@ static void process_command(conn *c, char *command) {
     }
 
     ntokens = tokenize_command(command, tokens, MAX_TOKENS);
+	fprintf(stderr, "ntokens%d,command%s",ntokens,tokens[COMMAND_TOKEN].value);
     if (ntokens >= 3 &&
         ((strcmp(tokens[COMMAND_TOKEN].value, "get") == 0) ||
          (strcmp(tokens[COMMAND_TOKEN].value, "bget") == 0))) {
-
+		fprintf(stderr, "get3\n");
         process_get_command(c, tokens, ntokens, false);
-
+	
     } else if ((ntokens == 6 || ntokens == 7) &&
                ((strcmp(tokens[COMMAND_TOKEN].value, "add") == 0 && (comm = NREAD_ADD)) ||
                 (strcmp(tokens[COMMAND_TOKEN].value, "set") == 0 && (comm = NREAD_SET)) ||
                 (strcmp(tokens[COMMAND_TOKEN].value, "replace") == 0 && (comm = NREAD_REPLACE)) ||
                 (strcmp(tokens[COMMAND_TOKEN].value, "prepend") == 0 && (comm = NREAD_PREPEND)) ||
                 (strcmp(tokens[COMMAND_TOKEN].value, "append") == 0 && (comm = NREAD_APPEND)) )) {
+		fprintf(stderr, "set67\n");
 
         process_update_command(c, tokens, ntokens, comm, false);
 
     } else if ((ntokens == 7 || ntokens == 8) && (strcmp(tokens[COMMAND_TOKEN].value, "cas") == 0 && (comm = NREAD_CAS))) {
+		fprintf(stderr, "cas78\n");
 
         process_update_command(c, tokens, ntokens, comm, true);
 
     } else if ((ntokens == 4 || ntokens == 5) && (strcmp(tokens[COMMAND_TOKEN].value, "incr") == 0)) {
+		fprintf(stderr, "incr45\n");
 
         process_arithmetic_command(c, tokens, ntokens, 1);
 
     } else if (ntokens >= 3 && (strcmp(tokens[COMMAND_TOKEN].value, "gets") == 0)) {
+		fprintf(stderr, "gets3\n");
 
         process_get_command(c, tokens, ntokens, true);
 
@@ -4040,6 +4045,7 @@ static void process_command(conn *c, char *command) {
         process_stat(c, tokens, ntokens);
 
     } else if (ntokens >= 2 && ntokens <= 4 && (strcmp(tokens[COMMAND_TOKEN].value, "flush_all") == 0)) {
+    	fprintf(stderr, "flush\n");
         time_t exptime = 0;
         rel_time_t new_oldest = 0;
 
@@ -4265,7 +4271,7 @@ static int try_read_command(conn *c) {
     assert(c != NULL);
     assert(c->rcurr <= (c->rbuf + c->rsize));
     assert(c->rbytes > 0);
-
+	fprintf(stderr, "read command\n");
     if (c->protocol == negotiating_prot || c->transport == udp_transport)  {
         if ((unsigned char)c->rbuf[0] == (unsigned char)PROTOCOL_BINARY_REQ) {
             c->protocol = binary_prot;
@@ -4382,6 +4388,8 @@ static int try_read_command(conn *c) {
         assert(cont <= (c->rcurr + c->rbytes));
 
         c->last_cmd_time = current_time;
+
+		fprintf(stderr, "begin process command\n");
         process_command(c, c->rcurr);
 
         c->rbytes -= (cont - c->rcurr);
@@ -4801,6 +4809,7 @@ static void fast_machine(conn *c) {
 
         case conn_parse_cmd :
             if (try_read_command(c) == 0) {
+				fprintf(stderr, "need more data\n");
                 /* wee need more data! */
                 conn_set_state(c, conn_waiting);
             }
