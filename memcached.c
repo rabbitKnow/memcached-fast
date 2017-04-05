@@ -4672,7 +4672,7 @@ void do_accept_new_conns(const bool do_accept) {
  */
 static enum transmit_result transmit(conn *c) {
     assert(c != NULL);
-	fprintf(stderr, "trasmit c=%d,u=%d\n",c->msgcurr,s->msgused);
+	fprintf(stderr, "trasmit c=%d,u=%d\n",c->msgcurr,c->msgused);
     if (c->msgcurr < c->msgused &&
             c->msglist[c->msgcurr].msg_iovlen == 0) {
         /* Finished writing the current msg; advance to the next. */
