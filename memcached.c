@@ -992,6 +992,8 @@ static int ensure_iov_space(conn *c) {
  */
 
 static int add_iov(conn *c, const void *buf, int len) {
+	fprintf(stderr, "add_iov\n");
+
     struct msghdr *m;
     int leftover;
     bool limit_to_mtu;
@@ -1205,6 +1207,7 @@ static void complete_nread_ascii(conn *c) {
     if (!is_valid) {
         out_string(c, "CLIENT_ERROR bad data chunk");
     } else {
+      fprintf(stderr, "store_item\n");
       ret = store_item(it, comm, c);
 
 #ifdef ENABLE_DTRACE
@@ -1239,9 +1242,11 @@ static void complete_nread_ascii(conn *c) {
 
       switch (ret) {
       case STORED:
+	  	  fprintf(stderr, "stored\n");
           out_string(c, "STORED");
           break;
       case EXISTS:
+	  	  fprintf(stderr, "exist\n");
           out_string(c, "EXISTS");
           break;
       case NOT_FOUND:
@@ -3609,6 +3614,7 @@ static void process_update_command(conn *c, token_t *tokens, const size_t ntoken
     c->ritem = ITEM_data(it);
     c->rlbytes = it->nbytes;
     c->cmd = comm;
+	fprintf(stderr, "conn_read\n");
     conn_set_state(c, conn_nread);
 }
 
@@ -4975,6 +4981,7 @@ static void fast_machine(conn *c) {
              */
             if (c->iovused == 0 || (IS_UDP(c->transport) && c->iovused == 1)) {
                 if (add_iov(c, c->wcurr, c->wbytes) != 0) {
+					
                     if (settings.verbose > 0)
                         fprintf(stderr, "Couldn't build response\n");
                     conn_set_state(c, conn_closing);
@@ -4991,6 +4998,7 @@ static void fast_machine(conn *c) {
             conn_set_state(c, conn_closing);
             break;
           }
+		   fprintf(stderr, "begin transmit\n");
             switch (transmit(c)) {
             case TRANSMIT_COMPLETE:
                 if (c->state == conn_mwrite) {
