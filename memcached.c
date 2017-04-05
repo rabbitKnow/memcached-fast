@@ -4443,6 +4443,7 @@ static enum try_read_result fast_read_udp(conn *c) {
     if (res > 8) {
 		fprintf(stderr, "have  data\n");
         unsigned char *buf = (unsigned char *)c->rbuf;
+		fprintf(stderr, "assgin buf  data\n");
         pthread_mutex_lock(&c->thread->stats.mutex);
         c->thread->stats.bytes_read += res;
         pthread_mutex_unlock(&c->thread->stats.mutex);
