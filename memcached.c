@@ -4445,7 +4445,9 @@ static enum try_read_result fast_read_udp(conn *c) {
         unsigned char *buf = (unsigned char *)c->rbuf;
 		fprintf(stderr, "assgin buf  data\n");
         pthread_mutex_lock(&c->thread->stats.mutex);
+		fprintf(stderr, "thread lock\n");
         c->thread->stats.bytes_read += res;
+		fprintf(stderr, "assign byte\n");
         pthread_mutex_unlock(&c->thread->stats.mutex);
 		fprintf(stderr, "request  data\n");
         /* Beginning of UDP packet is the request ID; save it. */
