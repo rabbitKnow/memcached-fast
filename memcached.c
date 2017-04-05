@@ -1103,6 +1103,7 @@ static int build_udp_headers(conn *c) {
 
 
 static void out_string(conn *c, const char *str) {
+	fprintf(stderr, "out string%s\n", str);
     size_t len;
 
     assert(c != NULL);
@@ -3614,7 +3615,7 @@ static void process_update_command(conn *c, token_t *tokens, const size_t ntoken
     c->ritem = ITEM_data(it);
     c->rlbytes = it->nbytes;
     c->cmd = comm;
-	fprintf(stderr, "conn_read\n");
+	fprintf(stderr, "conn_nread\n");
     conn_set_state(c, conn_nread);
 }
 
@@ -4671,7 +4672,7 @@ void do_accept_new_conns(const bool do_accept) {
  */
 static enum transmit_result transmit(conn *c) {
     assert(c != NULL);
-
+	fprintf(stderr, "trasmit c=%d,u=%d\n",c->msgcurr,s->msgused);
     if (c->msgcurr < c->msgused &&
             c->msglist[c->msgcurr].msg_iovlen == 0) {
         /* Finished writing the current msg; advance to the next. */
@@ -4682,6 +4683,7 @@ static enum transmit_result transmit(conn *c) {
         struct msghdr *m = &c->msglist[c->msgcurr];
 
         //res = sendmsg(c->sfd, m, 0);
+        fprintf(stderr, "sendmsg\n");
         res=fast_sendmsg(t_socket,m,0);
         if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
