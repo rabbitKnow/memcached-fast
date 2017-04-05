@@ -804,6 +804,7 @@ void memcached_thread_init(int nthreads) {
     for (i = 0; i < nthreads; i++) {
 		//bind fast_conn i to corresponding thread
 		threads[i].c=fast_conns[i];
+		fast_conns[i]->thread=&threads[i];
         create_worker(worker_libevent, &threads[i]);
     }
 	
