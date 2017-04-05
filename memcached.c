@@ -3996,7 +3996,7 @@ static void process_command(conn *c, char *command) {
     }
 
     ntokens = tokenize_command(command, tokens, MAX_TOKENS);
-	fprintf(stderr, "ntokens%d,command%s",ntokens,tokens[COMMAND_TOKEN].value);
+	fprintf(stderr, "ntokens%d,command%s\n",ntokens,tokens[COMMAND_TOKEN].value);
     if (ntokens >= 3 &&
         ((strcmp(tokens[COMMAND_TOKEN].value, "get") == 0) ||
          (strcmp(tokens[COMMAND_TOKEN].value, "bget") == 0))) {
