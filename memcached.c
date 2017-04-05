@@ -4441,11 +4441,12 @@ static enum try_read_result fast_read_udp(conn *c) {
 	fprintf(stderr, " addr assign\n");
 	
     if (res > 8) {
+		fprintf(stderr, "have  data\n");
         unsigned char *buf = (unsigned char *)c->rbuf;
         pthread_mutex_lock(&c->thread->stats.mutex);
         c->thread->stats.bytes_read += res;
         pthread_mutex_unlock(&c->thread->stats.mutex);
-
+		fprintf(stderr, "request  data\n");
         /* Beginning of UDP packet is the request ID; save it. */
         c->request_id = buf[0] * 256 + buf[1];
 
@@ -4454,7 +4455,7 @@ static enum try_read_result fast_read_udp(conn *c) {
             out_string(c, "SERVER_ERROR multi-packet request not supported");
             return READ_NO_DATA_RECEIVED;
         }
-
+		fprintf(stderr," drop  data\n");
         /* Don't care about any of the rest of the header. */
         res -= 8;
         memmove(c->rbuf, c->rbuf + 8, res);
