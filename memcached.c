@@ -4435,9 +4435,10 @@ static enum try_read_result fast_read_udp(conn *c) {
 	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,c->src_addr);
 	fprintf(stderr, " after try fast read\n");
 	struct sockaddr_in *addr=(struct sockaddr_in *)&c->request_addr;
-	
+	fprintf(stderr, " addr malloc\n");
 	addr->sin_addr.s_addr=c->src_addr;
 	c->request_addr_size=sizeof(struct sockaddr_in);
+	fprintf(stderr, " addr assign\n");
 	
     if (res > 8) {
         unsigned char *buf = (unsigned char *)c->rbuf;
@@ -4460,6 +4461,7 @@ static enum try_read_result fast_read_udp(conn *c) {
 
         c->rbytes = res;
         c->rcurr = c->rbuf;
+		fprintf(stderr, " return data\n");
         return READ_DATA_RECEIVED;
     }
     return READ_NO_DATA_RECEIVED;
