@@ -4859,7 +4859,7 @@ static void fast_machine(conn *c) {
 
         case conn_nread:
             if (c->rlbytes == 0) {
-				fprintf(stderr, "complete_nread\n",);
+				fprintf(stderr, "complete_nread\n");
                 complete_nread(c);
                 break;
             }
