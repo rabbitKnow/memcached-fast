@@ -4701,7 +4701,7 @@ static enum transmit_result transmit(conn *c) {
                 m->msg_iovlen--;
                 m->msg_iov++;
             }
-
+			fprintf(stderr, "res remain:%d\n",res);
             /* Might have written just part of the last iovec entry;
                adjust it so the next write will do the rest. */
             if (res > 0) {
