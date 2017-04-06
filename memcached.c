@@ -4687,7 +4687,7 @@ static enum transmit_result transmit(conn *c) {
 		int index=0;
 		char *strbuf=(char*)m->msg_iov->iov_base;
 		for(index=0;index<m->msg_iov->iov_len;index++)
-			fprintf(stderr, "%c",strbuf[index]);
+			fprintf(stderr, "%c ",strbuf[index]);
 		res=fast_sendmsg(t_socket,m,0);
 		if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
