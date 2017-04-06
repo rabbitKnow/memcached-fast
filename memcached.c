@@ -4686,7 +4686,7 @@ static enum transmit_result transmit(conn *c) {
         fprintf(stderr, "sendmsg:\n");
 		int index=0;
 		for(;index<m->msg_iov->iov_len;index++){
-			fprintf(stderr, "%c",msg->msg_iov->iov_base[index]);
+			fprintf(stderr, "%c",m->msg_iov->iov_base[index]);
 		}
 		fprintf(stderr, "\n");
         res=fast_sendmsg(t_socket,m,0);
