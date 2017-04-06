@@ -4683,7 +4683,12 @@ static enum transmit_result transmit(conn *c) {
         struct msghdr *m = &c->msglist[c->msgcurr];
 
         //res = sendmsg(c->sfd, m, 0);
-        fprintf(stderr, "sendmsg\n");
+        fprintf(stderr, "sendmsg:\n");
+		int index=0;
+		for(;index<m->msg_iov->iov_len;index++){
+			fprintf(stderr, "%c",msg->msg_iov->iov_base[index]);
+		}
+		fprintf(stderr, "\n");
         res=fast_sendmsg(t_socket,m,0);
         if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
