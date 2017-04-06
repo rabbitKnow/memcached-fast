@@ -4683,7 +4683,7 @@ static enum transmit_result transmit(conn *c) {
         struct msghdr *m = &c->msglist[c->msgcurr];
 
         //res = sendmsg(c->sfd, m, 0);
-        fprintf(stderr, "sendmsg:\n");
+        fprintf(stderr, "sendmsg:");
 		int index=0;
 		for(;index<m->msg_iov->iov_len;index++){
 			fprintf(stderr, "%c",m->msg_iov->iov_base[index]);
