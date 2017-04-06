@@ -1136,7 +1136,7 @@ static void out_string(conn *c, const char *str) {
     memcpy(c->wbuf + len, "\r\n", 2);
     c->wbytes = len + 2;
     c->wcurr = c->wbuf;
-
+	fprintf(stderr, "wcurr %s\n", c->wcurr);
     conn_set_state(c, conn_write);
     c->write_and_go = conn_new_cmd;
     return;
@@ -4672,7 +4672,7 @@ void do_accept_new_conns(const bool do_accept) {
  */
 static enum transmit_result transmit(conn *c) {
     assert(c != NULL);
-	fprintf(stderr, "trasmit c=%d,u=%d\n",c->msgcurr,c->msgused);
+	fprintf(stderr, "trasmit c=%d,u=%d,len=%d\n",c->msgcurr,c->msgused,c->msglist[c->msgcurr].msg_iovlen);
     if (c->msgcurr < c->msgused &&
             c->msglist[c->msgcurr].msg_iovlen == 0) {
         /* Finished writing the current msg; advance to the next. */
@@ -4859,6 +4859,7 @@ static void fast_machine(conn *c) {
 
         case conn_nread:
             if (c->rlbytes == 0) {
+				fprintf(stderr, "complete_nread\n",);
                 complete_nread(c);
                 break;
             }
