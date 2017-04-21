@@ -549,7 +549,7 @@ struct conn {
     socklen_t request_addr_size;
     unsigned char *hdrbuf; /* udp packet headers */
     int    hdrsize;   /* number of headers' worth of space is allocated */
-	uint32_t * src_addr;
+	
 	
 
     bool   noreply;   /* True if the reply should not be sent. */

@@ -4447,12 +4447,11 @@ static enum try_read_result fast_read_udp(conn *c) {
 
 	//wait to set src_addr in the conn struct
 	fprintf(stderr, " try fast read\n");
-	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,c->src_addr);
+	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,(struct sockaddr *)&c->request_addr,&c->request_addr_size);
 	fprintf(stderr, " after try fast read\n");
-	struct sockaddr_in *addr=(struct sockaddr_in *)&c->request_addr;
+
 	fprintf(stderr, " addr malloc\n");
-	addr->sin_addr.s_addr=c->src_addr;
-	c->request_addr_size=sizeof(struct sockaddr_in);
+	
 	fprintf(stderr, " addr assign\n");
 	
     if (res > 8) {
@@ -4688,6 +4687,7 @@ static enum transmit_result transmit(conn *c) {
 		char *strbuf=(char*)m->msg_iov->iov_base;
 		for(index=0;index<m->msg_iov->iov_len;index++)
 			fprintf(stderr, "%c ",strbuf[index]);
+		
 		res=fast_sendmsg(t_socket,m,0);
 		if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
