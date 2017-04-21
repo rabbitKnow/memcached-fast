@@ -464,7 +464,7 @@ static void fast_queue_init(int id){
         c->iov = (struct iovec *)malloc(sizeof(struct iovec) * c->iovsize);
         c->msglist = (struct msghdr *)malloc(sizeof(struct msghdr) * c->msgsize);
 
-		c->src_addr=(uint32_t*)malloc(sizeof(uint32_t));
+		
 
         if (c->rbuf == 0 || c->wbuf == 0 || c->ilist == 0 || c->iov == 0 ||
                 c->msglist == 0 || c->suffixlist == 0) {
