@@ -524,14 +524,14 @@ static void fast_queue_init(int id){
 static void fast_socket_init(int thread_num) {
 
 	int ret;
-	fprintf(stderr, "fast lib init before\n");
+	
 	ret=fast_lib_init();
-	fprintf(stderr, "fast lib init after\n");
+	
 	if(ret<0)
 		return ;
 	//t_socket=create_fast_socket();
 	t_socket=malloc(sizeof(struct fast_socket));
-	fprintf(stderr, "fast socket create after\n");
+	
 	//using struct's buffer
 	//uint16_t bufsize=64;
 	//char *buf=malloc(bufsize);
@@ -540,7 +540,7 @@ static void fast_socket_init(int thread_num) {
 	char addr[30];
 	strcpy(addr,"192.168.12.1");
 	ret=fast_bind(t_socket,addr);
-	fprintf(stderr, "fast bind after\n");
+	
 	// wait to alloc buffer
 
     max_fast = thread_num;
@@ -554,7 +554,7 @@ static void fast_socket_init(int thread_num) {
 	for(;id<thread_num;id++){
 		fast_queue_init(id);
 	}
-	fprintf(stderr, "fast queue init after\n");
+	
 	
 	return;
 	
@@ -1103,7 +1103,7 @@ static int build_udp_headers(conn *c) {
 
 
 static void out_string(conn *c, const char *str) {
-	fprintf(stderr, "out string%s\n", str);
+	
     size_t len;
 
     assert(c != NULL);
@@ -1136,7 +1136,7 @@ static void out_string(conn *c, const char *str) {
     memcpy(c->wbuf + len, "\r\n", 2);
     c->wbytes = len + 2;
     c->wcurr = c->wbuf;
-	fprintf(stderr, "wcurr %s\n", c->wcurr);
+	
     conn_set_state(c, conn_write);
     c->write_and_go = conn_new_cmd;
     return;
@@ -1208,7 +1208,7 @@ static void complete_nread_ascii(conn *c) {
     if (!is_valid) {
         out_string(c, "CLIENT_ERROR bad data chunk");
     } else {
-      fprintf(stderr, "store_item\n");
+      
       ret = store_item(it, comm, c);
 
 #ifdef ENABLE_DTRACE
@@ -1243,11 +1243,11 @@ static void complete_nread_ascii(conn *c) {
 
       switch (ret) {
       case STORED:
-	  	  fprintf(stderr, "stored\n");
+	  	  
           out_string(c, "STORED");
           break;
       case EXISTS:
-	  	  fprintf(stderr, "exist\n");
+	  	  
           out_string(c, "EXISTS");
           break;
       case NOT_FOUND:
@@ -4437,7 +4437,7 @@ void fast_data_process(conn *c){
 /* fast read data*/
 static enum try_read_result fast_read_udp(conn *c) {
     int res;
-	fprintf(stderr, " if c is null?\n");
+	
     assert(c != NULL);
 	//set size for non-zero 
     c->request_addr_size = sizeof(c->request_addr);
@@ -4446,24 +4446,19 @@ static enum try_read_result fast_read_udp(conn *c) {
                    //&c->request_addr_size);
 
 	//wait to set src_addr in the conn struct
-	fprintf(stderr, " try fast read\n");
-	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,(struct sockaddr *)&c->request_addr,&c->request_addr_size);
-	fprintf(stderr, " after try fast read\n");
-
-	fprintf(stderr, " addr malloc\n");
 	
-	fprintf(stderr, " addr assign\n");
+	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,(struct sockaddr *)&c->request_addr,&c->request_addr_size);
+	
 	
     if (res > 8) {
-		fprintf(stderr, "have  data\n");
+		
         unsigned char *buf = (unsigned char *)c->rbuf;
-		fprintf(stderr, "assgin buf  data\n");
+		
         pthread_mutex_lock(&c->thread->stats.mutex);
-		fprintf(stderr, "thread lock\n");
+		
         c->thread->stats.bytes_read += res;
-		fprintf(stderr, "assign byte\n");
         pthread_mutex_unlock(&c->thread->stats.mutex);
-		fprintf(stderr, "request  data\n");
+		
         /* Beginning of UDP packet is the request ID; save it. */
         c->request_id = buf[0] * 256 + buf[1];
 
@@ -4472,14 +4467,14 @@ static enum try_read_result fast_read_udp(conn *c) {
             out_string(c, "SERVER_ERROR multi-packet request not supported");
             return READ_NO_DATA_RECEIVED;
         }
-		fprintf(stderr," drop  data\n");
+		
         /* Don't care about any of the rest of the header. */
         res -= 8;
         memmove(c->rbuf, c->rbuf + 8, res);
 
         c->rbytes = res;
         c->rcurr = c->rbuf;
-		fprintf(stderr, " return data\n");
+		
         return READ_DATA_RECEIVED;
     }
     return READ_NO_DATA_RECEIVED;
@@ -5005,7 +5000,7 @@ static void fast_machine(conn *c) {
             conn_set_state(c, conn_closing);
             break;
           }
-		   fprintf(stderr, "begin transmit\n");
+		   
             switch (transmit(c)) {
             case TRANSMIT_COMPLETE:
                 if (c->state == conn_mwrite) {
