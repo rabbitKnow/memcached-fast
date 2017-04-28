@@ -992,8 +992,7 @@ static int ensure_iov_space(conn *c) {
  */
 
 static int add_iov(conn *c, const void *buf, int len) {
-	fprintf(stderr, "add_iov\n");
-
+	
     struct msghdr *m;
     int leftover;
     bool limit_to_mtu;
@@ -4003,11 +4002,11 @@ static void process_command(conn *c, char *command) {
     }
 
     ntokens = tokenize_command(command, tokens, MAX_TOKENS);
-	fprintf(stderr, "ntokens%d,command%s\n",ntokens,tokens[COMMAND_TOKEN].value);
+	
     if (ntokens >= 3 &&
         ((strcmp(tokens[COMMAND_TOKEN].value, "get") == 0) ||
          (strcmp(tokens[COMMAND_TOKEN].value, "bget") == 0))) {
-		fprintf(stderr, "get3\n");
+		
         process_get_command(c, tokens, ntokens, false);
 	
     } else if ((ntokens == 6 || ntokens == 7) &&
@@ -4016,22 +4015,21 @@ static void process_command(conn *c, char *command) {
                 (strcmp(tokens[COMMAND_TOKEN].value, "replace") == 0 && (comm = NREAD_REPLACE)) ||
                 (strcmp(tokens[COMMAND_TOKEN].value, "prepend") == 0 && (comm = NREAD_PREPEND)) ||
                 (strcmp(tokens[COMMAND_TOKEN].value, "append") == 0 && (comm = NREAD_APPEND)) )) {
-		fprintf(stderr, "set67\n");
+		
 
         process_update_command(c, tokens, ntokens, comm, false);
 
     } else if ((ntokens == 7 || ntokens == 8) && (strcmp(tokens[COMMAND_TOKEN].value, "cas") == 0 && (comm = NREAD_CAS))) {
-		fprintf(stderr, "cas78\n");
+		
 
         process_update_command(c, tokens, ntokens, comm, true);
 
     } else if ((ntokens == 4 || ntokens == 5) && (strcmp(tokens[COMMAND_TOKEN].value, "incr") == 0)) {
-		fprintf(stderr, "incr45\n");
-
+		
         process_arithmetic_command(c, tokens, ntokens, 1);
 
     } else if (ntokens >= 3 && (strcmp(tokens[COMMAND_TOKEN].value, "gets") == 0)) {
-		fprintf(stderr, "gets3\n");
+		
 
         process_get_command(c, tokens, ntokens, true);
 
@@ -4052,7 +4050,7 @@ static void process_command(conn *c, char *command) {
         process_stat(c, tokens, ntokens);
 
     } else if (ntokens >= 2 && ntokens <= 4 && (strcmp(tokens[COMMAND_TOKEN].value, "flush_all") == 0)) {
-    	fprintf(stderr, "flush\n");
+    	
         time_t exptime = 0;
         rel_time_t new_oldest = 0;
 
@@ -4278,7 +4276,7 @@ static int try_read_command(conn *c) {
     assert(c != NULL);
     assert(c->rcurr <= (c->rbuf + c->rsize));
     assert(c->rbytes > 0);
-	fprintf(stderr, "read command\n");
+	
     if (c->protocol == negotiating_prot || c->transport == udp_transport)  {
         if ((unsigned char)c->rbuf[0] == (unsigned char)PROTOCOL_BINARY_REQ) {
             c->protocol = binary_prot;
@@ -4396,7 +4394,6 @@ static int try_read_command(conn *c) {
 
         c->last_cmd_time = current_time;
 
-		fprintf(stderr, "begin process command\n");
         process_command(c, c->rcurr);
 
         c->rbytes -= (cont - c->rcurr);
@@ -4666,7 +4663,7 @@ void do_accept_new_conns(const bool do_accept) {
  */
 static enum transmit_result transmit(conn *c) {
     assert(c != NULL);
-	fprintf(stderr, "trasmit c=%d,u=%d,len=%d\n",c->msgcurr,c->msgused,c->msglist[c->msgcurr].msg_iovlen);
+	
     if (c->msgcurr < c->msgused &&
             c->msglist[c->msgcurr].msg_iovlen == 0) {
         /* Finished writing the current msg; advance to the next. */
@@ -4677,12 +4674,7 @@ static enum transmit_result transmit(conn *c) {
         struct msghdr *m = &c->msglist[c->msgcurr];
 
         //res = sendmsg(c->sfd, m, 0);
-        fprintf(stderr, "sendmsg:%d",m->msg_iov->iov_len);
-		int index=0;
-		char *strbuf=(char*)m->msg_iov->iov_base;
-		for(index=0;index<m->msg_iov->iov_len;index++)
-			fprintf(stderr, "%c ",strbuf[index]);
-		
+    
 		res=fast_sendmsg(t_socket,m,0);
 		if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
@@ -4696,7 +4688,7 @@ static enum transmit_result transmit(conn *c) {
                 m->msg_iovlen--;
                 m->msg_iov++;
             }
-			fprintf(stderr, "res remain:%d\n",res);
+			
             /* Might have written just part of the last iovec entry;
                adjust it so the next write will do the rest. */
             if (res > 0) {
@@ -4816,7 +4808,6 @@ static void fast_machine(conn *c) {
 
         case conn_parse_cmd :
             if (try_read_command(c) == 0) {
-				fprintf(stderr, "need more data\n");
                 /* wee need more data! */
                 conn_set_state(c, conn_waiting);
             }
@@ -4854,7 +4845,7 @@ static void fast_machine(conn *c) {
 
         case conn_nread:
             if (c->rlbytes == 0) {
-				fprintf(stderr, "complete_nread\n");
+				
                 complete_nread(c);
                 break;
             }
