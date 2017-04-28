@@ -799,7 +799,7 @@ void memcached_thread_init(int nthreads) {
         /* Reserve three fds for the libevent base, and two for the pipe */
         stats_state.reserved_fds += 5;
     }
-	fprintf(stderr, "threads create before=%d\n",nthreads);
+	
     /* Create threads after we've done all the libevent setup. */
     for (i = 0; i < nthreads; i++) {
 		//bind fast_conn i to corresponding thread
@@ -809,13 +809,13 @@ void memcached_thread_init(int nthreads) {
     }
 	
 
-	fprintf(stderr, "threads create finished\n");
+	
 
     /* Wait for all the threads to set themselves up before returning. */
     pthread_mutex_lock(&init_lock);
     wait_for_thread_registration(nthreads);
     pthread_mutex_unlock(&init_lock);
 	
-	fprintf(stderr, "threads registration\n");
+
 }
 

@@ -3614,7 +3614,7 @@ static void process_update_command(conn *c, token_t *tokens, const size_t ntoken
     c->ritem = ITEM_data(it);
     c->rlbytes = it->nbytes;
     c->cmd = comm;
-	fprintf(stderr, "conn_nread\n");
+	
     conn_set_state(c, conn_nread);
 }
 
