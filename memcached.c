@@ -4415,9 +4415,9 @@ void fast_data_process(conn *c){
 	
 	int res;
 	while(!stop){
-		fprintf(stderr, "before fast read\n");
+		
 		res=fast_read_udp(c);
-		fprintf(stderr, "after fast read\n");
+		
 		switch (res) {
 	            case READ_NO_DATA_RECEIVED:
 	                conn_set_state(c, conn_waiting);

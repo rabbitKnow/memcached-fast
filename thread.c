@@ -382,10 +382,10 @@ static void *worker_libevent(void *arg) {
 
     register_thread_initialized();
 	conn *c=me->c;
-	fprintf(stderr, "begin process\n");
+	
 	fast_data_process(c);
 
-	fprintf(stderr, "\n");
+	
 	//disable eventloop 
 	//event_base_loop(me->base, 0);
     return NULL;
