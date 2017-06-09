@@ -529,8 +529,8 @@ static void fast_socket_init(int thread_num) {
 	
 	if(ret<0)
 		return ;
-	//t_socket=create_fast_socket();
-	t_socket=malloc(sizeof(struct fast_socket));
+	t_socket=create_fast_socket();
+	//t_socket=malloc(sizeof(struct fast_socket));
 	
 	//using struct's buffer
 	//uint16_t bufsize=64;
