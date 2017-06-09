@@ -4444,7 +4444,7 @@ static enum try_read_result fast_read_udp(conn *c) {
 
 	//wait to set src_addr in the conn struct
 	
-	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,(struct sockaddr *)&c->request_addr,&c->request_addr_size);
+	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,(struct sockaddr *)&c->request_addr,&c->request_addr_size,c->queue);
 	
 	
     if (res > 8) {
@@ -4675,7 +4675,7 @@ static enum transmit_result transmit(conn *c) {
 
         //res = sendmsg(c->sfd, m, 0);
     
-		res=fast_sendmsg(t_socket,m,0);
+		res=fast_sendmsg(t_socket,m,0,c->queue);
 		if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
             c->thread->stats.bytes_written += res;

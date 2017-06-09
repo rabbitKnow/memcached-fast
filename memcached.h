@@ -569,6 +569,8 @@ struct conn {
     int keylen;
     conn   *next;     /* Used for generating a list of conn structures */
     LIBEVENT_THREAD *thread; /* Pointer to the thread object serving this connection */
+
+	uint16_t queue; /* set queue*/
 };
 
 /* array of conn structures, indexed by file descriptor */
