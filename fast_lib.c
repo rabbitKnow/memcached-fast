@@ -163,7 +163,7 @@ int fast_lib_init(void){
 	argv[2]=malloc(20);
 	snprintf(argv[2], 20, "4");
 	argv[3]=malloc(32);
-	snprintf(argv[3], 32, "--proc-type=secondary");
+	snprintf(argv[3], 32, "--proc-type=primary");
 
 	ret = rte_eal_init(argc, argv);
 	if (ret < 0)
@@ -183,7 +183,7 @@ struct fast_socket * create_fast_socket(void){
 	//init mempool&mbuf array
 	int i=0;
 	fprintf(stderr,"buf size%d",RTE_MBUF_DEFAULT_BUF_SIZE);
-	for(;i<1;i++){
+	for(;i<8;i++){
 
 		snprintf(name, sizeof(name), "mbuf_pool_%u", i);
 		socket->mem_pool[i]= rte_pktmbuf_pool_create(
@@ -206,8 +206,8 @@ struct fast_socket * create_fast_socket(void){
 	/* Init NIC ports and queues, then start the ports */
 	for (port = 0; port < 1; port ++) {
 
-		n_rx_queues = 1;
-		n_tx_queues = 1;
+		n_rx_queues = 8;
+		n_tx_queues = 8;
 
 		if ((n_rx_queues == 0) && (n_tx_queues == 0)) {
 			continue;
@@ -227,7 +227,7 @@ struct fast_socket * create_fast_socket(void){
 
 		/* Init RX queues */
 		queue=0;
-		for(;queue<1;queue++){
+		for(;queue<8;queue++){
 
 			printf("Initializing NIC port %u RX queue %u ...\n",
 					(unsigned) port,
@@ -248,8 +248,8 @@ struct fast_socket * create_fast_socket(void){
 
 			/* Init TX queues */
 
-			printf("Initializing NIC port %u TX queue 0 ...\n",
-					(unsigned) port);
+			printf("Initializing NIC port %u TX queue %u ...\n",
+					(unsigned) port,(unsigned)queue);
 			ret = rte_eth_tx_queue_setup(
 					port,
 					queue,
