@@ -534,7 +534,7 @@ static void fast_socket_init(int thread_num) {
 	//uint16_t len=bufsize;
 	char addr[30];
 	strcpy(addr,"192.168.12.1");
-	ret=fast_bind(t_socket,addr);
+	fast_bind(t_socket,addr);
 	
 	// wait to alloc buffer
 
