@@ -352,7 +352,7 @@ CC = gcc -std=gnu99
 CCDEPMODE = depmode=gcc3
 #disable warning as error -Werror
 
-CFLAGS = -g -O2 -pthread -pthread -Wall -pedantic -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wl,--no-as-needed -ldl
+CFLAGS = -g -O2 -pthread -Wall -pedantic -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wl,--no-as-needed -ldl
 CPP = gcc -E
 CPPFLAGS = -I/root/memcached-fast  
 CYGPATH_W = echo
