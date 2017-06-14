@@ -4407,7 +4407,7 @@ void fast_data_process(conn *c){
 	
 	int res;
 	while(!stop){
-		
+		fprintf("read_udp,queue=%u\n",c->queue);
 		res=fast_read_udp(c);
 		
 		switch (res) {
