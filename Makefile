@@ -137,6 +137,9 @@ am__objects_1 = memcached-cache.$(OBJEXT)
 #am__objects_2 =  \
 #	memcached-solaris_priv.$(OBJEXT)
 #am__objects_3 = memcached-sasl_defs.$(OBJEXT)
+
+fast_LIBS=fast_lib.a -Wl,--whole-archive librte_distributor.a librte_reorder.a librte_kni.a librte_pipeline.a librte_table.a librte_port.a librte_timer.a librte_hash.a librte_jobstats.a librte_lpm.a librte_power.a librte_acl.a librte_meter.a librte_sched.a -Wl,-lm -Wl,-lrt librte_vhost.a -Wl,--start-group librte_kvargs.a librte_mbuf.a librte_mbuf_offload.a librte_ip_frag.a libethdev.a librte_cryptodev.a librte_mempool.a librte_ring.a librte_eal.a librte_cmdline.a librte_cfgfile.a librte_pmd_bond.a librte_pmd_vmxnet3_uio.a librte_pmd_virtio.a librte_pmd_cxgbe.a librte_pmd_enic.a librte_pmd_i40e.a librte_pmd_fm10k.a librte_pmd_ixgbe.a librte_pmd_e1000.a librte_pmd_ring.a librte_pmd_af_packet.a librte_pmd_null.a -Wl,-lrt -Wl,-lm -Wl,-ldl -Wl,--end-group -Wl,--no-whole-archive 
+
 am_memcached_OBJECTS = memcached-memcached.$(OBJEXT) \
 	memcached-hash.$(OBJEXT) memcached-jenkins_hash.$(OBJEXT) \
 	memcached-murmur3_hash.$(OBJEXT) memcached-slabs.$(OBJEXT) \
@@ -145,7 +148,6 @@ am_memcached_OBJECTS = memcached-memcached.$(OBJEXT) \
 	memcached-stats.$(OBJEXT) memcached-util.$(OBJEXT) \
 	memcached-bipbuffer.$(OBJEXT) memcached-logger.$(OBJEXT) \
 	memcached-crawler.$(OBJEXT) \
-	fast_lib.a -Wl,--whole-archive librte_distributor.a librte_reorder.a librte_kni.a librte_pipeline.a librte_table.a librte_port.a librte_timer.a librte_hash.a librte_jobstats.a librte_lpm.a librte_power.a librte_acl.a librte_meter.a librte_sched.a -Wl,-lm -Wl,-lrt librte_vhost.a -Wl,--start-group librte_kvargs.a librte_mbuf.a librte_mbuf_offload.a librte_ip_frag.a libethdev.a librte_cryptodev.a librte_mempool.a librte_ring.a librte_eal.a librte_cmdline.a librte_cfgfile.a librte_pmd_bond.a librte_pmd_vmxnet3_uio.a librte_pmd_virtio.a librte_pmd_cxgbe.a librte_pmd_enic.a librte_pmd_i40e.a librte_pmd_fm10k.a librte_pmd_ixgbe.a librte_pmd_e1000.a librte_pmd_ring.a librte_pmd_af_packet.a librte_pmd_null.a -Wl,-lrt -Wl,-lm -Wl,-ldl -Wl,--end-group -Wl,--no-whole-archive \
 	$(am__objects_1) $(am__objects_2) \
 	$(am__objects_3)
 memcached_OBJECTS = $(am_memcached_OBJECTS)
@@ -171,8 +173,8 @@ am__objects_7 = memcached_debug-memcached.$(OBJEXT) \
 	memcached_debug-bipbuffer.$(OBJEXT) \
 	memcached_debug-logger.$(OBJEXT) \
 	memcached_debug-crawler.$(OBJEXT) $(am__objects_4) \
-	$(am__objects_5) $(am__objects_6)\
-	fast_lib.a -Wl,--whole-archive librte_distributor.a librte_reorder.a librte_kni.a librte_pipeline.a librte_table.a librte_port.a librte_timer.a librte_hash.a librte_jobstats.a librte_lpm.a librte_power.a librte_acl.a librte_meter.a librte_sched.a -Wl,-lm -Wl,-lrt librte_vhost.a -Wl,--start-group librte_kvargs.a librte_mbuf.a librte_mbuf_offload.a librte_ip_frag.a libethdev.a librte_cryptodev.a librte_mempool.a librte_ring.a librte_eal.a librte_cmdline.a librte_cfgfile.a librte_pmd_bond.a librte_pmd_vmxnet3_uio.a librte_pmd_virtio.a librte_pmd_cxgbe.a librte_pmd_enic.a librte_pmd_i40e.a librte_pmd_fm10k.a librte_pmd_ixgbe.a librte_pmd_e1000.a librte_pmd_ring.a librte_pmd_af_packet.a librte_pmd_null.a -Wl,-lrt -Wl,-lm -Wl,-ldl -Wl,--end-group -Wl,--no-whole-archive 
+	$(am__objects_5) $(am__objects_6)
+	
 am_memcached_debug_OBJECTS = $(am__objects_7)
 memcached_debug_OBJECTS = $(am_memcached_debug_OBJECTS)
 memcached_debug_LINK = $(CCLD) $(memcached_debug_CFLAGS) $(CFLAGS) \
@@ -570,11 +572,11 @@ clean-noinstPROGRAMS:
 
 memcached$(EXEEXT): $(memcached_OBJECTS) $(memcached_DEPENDENCIES) $(EXTRA_memcached_DEPENDENCIES) 
 	@rm -f memcached$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(memcached_OBJECTS) $(memcached_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(memcached_OBJECTS) $(memcached_LDADD) $(fast_LIBS) $(LIBS)
 
 memcached-debug$(EXEEXT): $(memcached_debug_OBJECTS) $(memcached_debug_DEPENDENCIES) $(EXTRA_memcached_debug_DEPENDENCIES) 
 	@rm -f memcached-debug$(EXEEXT)
-	$(AM_V_CCLD)$(memcached_debug_LINK) $(memcached_debug_OBJECTS) $(memcached_debug_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(memcached_debug_LINK) $(memcached_debug_OBJECTS) $(memcached_debug_LDADD) $(fast_LIBS) $(LIBS)
 
 sizes$(EXEEXT): $(sizes_OBJECTS) $(sizes_DEPENDENCIES) $(EXTRA_sizes_DEPENDENCIES) 
 	@rm -f sizes$(EXEEXT)
