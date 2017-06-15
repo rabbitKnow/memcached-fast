@@ -523,7 +523,12 @@ static void fast_queue_init(int id){
 }
 static void fast_socket_init(int thread_num) {
 
+	int ret;
 	
+	ret=fast_lib_init();
+	
+	if(ret<0)
+		return ;
 	t_socket=create_fast_socket();
 	//t_socket=malloc(sizeof(struct fast_socket));
 	
@@ -533,7 +538,7 @@ static void fast_socket_init(int thread_num) {
 	//memset(buf,1,bufsize);
 	//uint16_t len=bufsize;
 	char addr[30];
-	strcpy(addr,"192.168.12.1");
+	strcpy(addr,"192.168.11.1");
 	fast_bind(t_socket,addr);
 	
 	// wait to alloc buffer
@@ -6163,12 +6168,7 @@ static bool _parse_slab_sizes(char *s, uint32_t *slab_sizes) {
  
 int main (int argc, char **argv) {
 
-	int ret;
 	
-	ret=fast_lib_init();
-	
-	if(ret<0)
-		return ;
 	
     int c;
     bool lock_memory = false;
