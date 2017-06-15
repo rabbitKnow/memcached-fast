@@ -382,7 +382,19 @@ static void *worker_libevent(void *arg) {
 
     register_thread_initialized();
 	conn *c=me->c;
-	
+
+	int core=c->queue+1;
+	int i=0;
+	unsigned long mask = 1;
+	for(;i<core;i++){
+		mask*=2;
+    }
+	/* bind thread to processor core */
+			if (pthread_setaffinity_np(pthread_self(), sizeof(mask), 
+									&mask) <0) {
+					perror("pthread_setaffinity_np");
+			} 
+
 	fast_data_process(c);
 
 	
