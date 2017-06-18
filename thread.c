@@ -833,7 +833,7 @@ void memcached_thread_init(int nthreads) {
 	for (i = 0; i < 8; i++) {
 		
 		fast_conns[i]->port=i;
-		nthread=(lthread+1)%nthreads;
+		nthread=(lthread+1)%8;
 		fast_conns[i]->thread=&threads[nthread];
 		threads[nthread].c[i/nthreads]=fast_conns[i];
 		lthread=nthread;
