@@ -102,7 +102,7 @@ static void event_handler(const int fd, const short which, void *arg);
 static void conn_close(conn *c);
 static void conn_init(void);
 static void fast_socket_init(int thread_num);
-static void fast_queue_init(int num);
+static void fast_port_init(int num);
 static bool update_event(conn *c, const int new_flags);
 static void complete_nread(conn *c);
 static void process_command(conn *c, char *command);
@@ -427,7 +427,7 @@ static void conn_init(void) {
     }
 }
 
-static void fast_queue_init(int id){
+static void fast_port_init(int id){
 	/* previous initialize fast struct associate with every thread*/
 	conn *c=NULL;
 	//joke !!c== null!!
@@ -543,19 +543,18 @@ static void fast_socket_init(int thread_num) {
 	
 	// wait to alloc buffer
 
-    max_fast = thread_num;
-
-    if ((fast_conns = calloc(max_fds, sizeof(conn *))) == NULL) {
+    //max_fast = thread_num;
+	// calloc for every port
+    if ((fast_conns = calloc(8, sizeof(conn *))) == NULL) {
         fprintf(stderr, "Failed to allocate connection structures\n");
         /* This is unrecoverable so bail out early. */
         exit(1);
     }
 	int id=0;
-	for(;id<thread_num;id++){
-		fast_queue_init(id);
+	// assgin for every port
+	for(;id<8;id++){
+		fast_port_init(id);
 	}
-	
-	
 	return;
 	
 }
@@ -4408,10 +4407,9 @@ static int try_read_command(conn *c) {
 
 void fast_data_process(conn *c){
 		// process schedule as try to read udp
-	bool stop = false;
 	
 	int res;
-	while(!stop){
+	
 		//fprintf(stderr,"read_udp,queue=%u\n",c->queue);
 		res=fast_read_udp(c);
 		
@@ -4426,7 +4424,6 @@ void fast_data_process(conn *c){
 	            }
 		fast_machine(c);
 		
-		}
 
 
 }
@@ -4444,7 +4441,7 @@ static enum try_read_result fast_read_udp(conn *c) {
 
 	//wait to set src_addr in the conn struct
 	
-	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,(struct sockaddr *)&c->request_addr,&c->request_addr_size,c->queue);
+	res=fast_recvfrom(t_socket,c->rbuf,c->rsize,0,(struct sockaddr *)&c->request_addr,&c->request_addr_size,c->port);
 	
 	
     if (res > 8) {
@@ -4675,7 +4672,7 @@ static enum transmit_result transmit(conn *c) {
 
         //res = sendmsg(c->sfd, m, 0);
     
-		res=fast_sendmsg(t_socket,m,0,c->queue);
+		res=fast_sendmsg(t_socket,m,0,c->port);
 		if (res > 0) {
             pthread_mutex_lock(&c->thread->stats.mutex);
             c->thread->stats.bytes_written += res;

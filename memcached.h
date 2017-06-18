@@ -471,7 +471,9 @@ typedef struct {
     struct conn_queue *new_conn_queue; /* queue of new connections to handle */
     cache_t *suffix_cache;      /* suffix cache */
     logger *l;                  /* logger buffer */
-	conn *c;
+	conn **c;
+	uint16_t conn_num;
+	uint16_t core;
 } LIBEVENT_THREAD;
 
 /**
@@ -570,7 +572,7 @@ struct conn {
     conn   *next;     /* Used for generating a list of conn structures */
     LIBEVENT_THREAD *thread; /* Pointer to the thread object serving this connection */
 
-	uint16_t queue; /* set queue*/
+	uint16_t port; /* set port*/
 };
 
 /* array of conn structures, indexed by file descriptor */

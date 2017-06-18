@@ -381,9 +381,9 @@ static void *worker_libevent(void *arg) {
     }
 
     register_thread_initialized();
-	conn *c=me->c;
+	
 
-	int core=c->queue+1;
+	int core=me->id+1;
 	int i=0;
 	unsigned long mask = 1;
 	for(;i<core;i++){
@@ -395,7 +395,13 @@ static void *worker_libevent(void *arg) {
 					perror("pthread_setaffinity_np");
 			} 
 
-	fast_data_process(c);
+	bool stop = false;
+	while(!stop){
+		for(i=0;i<me->conn_num;i++){
+			fast_data_process(me->c[i]);
+		}
+	}
+	
 
 	
 	//disable eventloop 
@@ -811,13 +817,33 @@ void memcached_thread_init(int nthreads) {
         /* Reserve three fds for the libevent base, and two for the pipe */
         stats_state.reserved_fds += 5;
     }
+	/* thread corresponding conns init */
+	 for (i = 0; i < nthreads; i++) {
+		//assign conn_num and alloc
+		threads[i].conn_num=8/nthreads;
+		threads[i].conn_num+=i<8%nthreads?1:0;
+		threads[i].c=malloc(threads[i].conn_num,sizeof(conn *));
+		threads[i].id=i;
+		
+	
+    }
+	/* port fast_conns bind to threads */
+	uint16_t lthread=0;
+	uint16_t nthread=0;
+	for (i = 0; i < 8; i++) {
+		
+		fast_conns[i]->port=i;
+		nthread=(lthread+1)%nthreads;
+		fast_conns[i]->thread=&threads[nthread];
+		threads[nthread].c[i/nthreads]=fast_conns[i];
+		lthread=nthread;
+		fprintf(stderr,"conn%d,thread%u,index%d\n",i,nthread,i/nthreads);
+    }
+
 	
     /* Create threads after we've done all the libevent setup. */
     for (i = 0; i < nthreads; i++) {
-		//bind fast_conn i to corresponding thread
-		threads[i].c=fast_conns[i];
-		fast_conns[i]->thread=&threads[i];
-		fast_conns[i]->queue=i;
+		
         create_worker(worker_libevent, &threads[i]);
     }
 	
