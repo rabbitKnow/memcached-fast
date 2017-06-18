@@ -836,8 +836,8 @@ void memcached_thread_init(int nthreads) {
 		nthread=(lthread+1)%nthreads;
 		fast_conns[i]->thread=&threads[nthread];
 		threads[nthread].c[i/nthreads]=fast_conns[i];
-		lthread=nthread;
 		fprintf(stderr,"conn%d,thread%u,index%d\n",i,nthread,i/nthreads);
+		lthread=nthread;
     }
 
 	
