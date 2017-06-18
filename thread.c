@@ -828,7 +828,7 @@ void memcached_thread_init(int nthreads) {
 	
     }
 	/* port fast_conns bind to threads */
-	uint16_t lthread=0;
+	uint16_t lthread=-1;
 	uint16_t nthread=0;
 	for (i = 0; i < 8; i++) {
 		
