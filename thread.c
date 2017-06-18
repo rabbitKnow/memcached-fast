@@ -822,7 +822,7 @@ void memcached_thread_init(int nthreads) {
 		//assign conn_num and alloc
 		threads[i].conn_num=8/nthreads;
 		threads[i].conn_num+=i<8%nthreads?1:0;
-		threads[i].c=malloc(threads[i].conn_num,sizeof(conn *));
+		threads[i].c=malloc(threads[i].conn_num*sizeof(conn *));
 		threads[i].core=i;
 		
 	
