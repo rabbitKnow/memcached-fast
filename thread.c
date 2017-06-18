@@ -383,7 +383,7 @@ static void *worker_libevent(void *arg) {
     register_thread_initialized();
 	
 
-	int core=me->id+1;
+	int core=me->core+1;
 	int i=0;
 	unsigned long mask = 1;
 	for(;i<core;i++){
@@ -823,7 +823,7 @@ void memcached_thread_init(int nthreads) {
 		threads[i].conn_num=8/nthreads;
 		threads[i].conn_num+=i<8%nthreads?1:0;
 		threads[i].c=malloc(threads[i].conn_num,sizeof(conn *));
-		threads[i].id=i;
+		threads[i].core=i;
 		
 	
     }
