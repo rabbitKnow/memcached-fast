@@ -828,16 +828,15 @@ void memcached_thread_init(int nthreads) {
 	
     }
 	/* port fast_conns bind to threads */
-	uint16_t lthread=-1;
+	
 	uint16_t nthread=0;
 	for (i = 0; i < 8; i++) {
 		
 		fast_conns[i]->port=i;
-		nthread=(lthread+1)%nthreads;
 		fast_conns[i]->thread=&threads[nthread];
 		threads[nthread].c[i/nthreads]=fast_conns[i];
 		fprintf(stderr,"conn%d,thread%u,index%d\n",i,nthread,i/nthreads);
-		lthread=nthread;
+		nthread=(nthread+1)%nthreads;
     }
 
 	
